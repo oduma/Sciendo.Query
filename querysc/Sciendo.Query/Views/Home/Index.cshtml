@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Search";
+}
+@section active
+{
+    <input class="required" data-bind="value: criteria, selected: true, blurOnEnter: true" />
+    <button data-bind="click: getResults">Go</button>
+}
+<h3>Results</h3>
+<p class="error" data-bind="text: error"></p>
+<div data-bind="with: resultData">
+    <p data-bind="text: message"></p>
+    <table>
+        <thead>
+            <tr>
+                <td>File Path</td>
+                <td>Album</td>
+                <td>Artist</td>
+                <td>Title</td>
+                <td>Lyrics</td>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: resultRows">
+            <tr>
+                <td data-bind="text: filePath" />
+                <td data-bind="text: album" />
+                <td data-bind="text: artist" />
+                <td data-bind="text: title" />
+                <td data-bind="text: lyrics" />
+            </tr>
+        </tbody>
+    </table>
+ </div>
+@section scripts
+{
+
+    @Scripts.Render("~/bundles/index")
+}
