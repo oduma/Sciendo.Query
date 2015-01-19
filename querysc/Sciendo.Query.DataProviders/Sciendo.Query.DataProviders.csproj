@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MockResultsProvider.cs" />
+    <Compile Include="SolrResultsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sciendo.Query.Contracts\Sciendo.Query.Contracts.csproj">

@@ -13,6 +13,7 @@ namespace Sciendo.Query
         public static void RegisterComponents(Container container)
         {
             container.Add(new RegisteredType().For<MockResultsProvider>().BasedOn<IResultsProvider>().IdentifiedBy("mockResultsProvider").With(LifeStyle.Transient));
+            container.Add(new RegisteredType().For<SolrResultsProvider>().BasedOn<IResultsProvider>().IdentifiedBy("solrResultsProvider").With(LifeStyle.Transient));
         }
     }
 }
