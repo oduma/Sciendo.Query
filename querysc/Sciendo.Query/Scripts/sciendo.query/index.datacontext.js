@@ -7,9 +7,18 @@
             .fail(getFailed);
 
         function getSucceeded(data) {
-            //errorObservable(data);
-            //var mappedResults = $.map(data, function (list) { return new createResults(list); });
-            resultObservable({ message: "Ok" ,resultRows:data});
+            var grdModel = new ko.simpleGrid.viewModel({
+                data: data,
+                columns: [
+                    { headerText: "File Path", rowText: "filePath" },
+                    { headerText: "Album", rowText: "album" },
+                    { headerText: "Artist", rowText: "artist" },
+                    { headerText: "Title", rowText: "title" },
+                    { headerText: "Lyrics", rowText: "lyrics" }
+                ], pageSize: 4
+            });
+            resultObservable({ message: "Ok", resultRows: data ,gridViewModel:grdModel});
+
             errorObservable();
         }
 
@@ -22,10 +31,7 @@
         return new datacontext.resultRow(data); // todoItem is injected by todo.model.js
     }
 
-    function createResults(data) {
 
-        return new datacontext.result(data); // todoList is injected by todo.model.js
-    }
     // Private
     function clearErrorMessage(entity) { entity.errorMessage(null); }
     function ajaxRequest(type, url, data, dataType) { // Ajax helper

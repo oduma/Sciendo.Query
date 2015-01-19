@@ -27,8 +27,8 @@ namespace Sciendo.Query
             "~/Scripts/knockout-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/index").Include(
+                "~/Scripts/sciendo.query/knockout*",
     "~/Scripts/sciendo.query/index*"));
-
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 

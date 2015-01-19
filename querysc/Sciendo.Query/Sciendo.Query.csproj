@@ -225,7 +225,7 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\sciendo.query\index.datacontext.js" />
-    <Content Include="Scripts\sciendo.query\tempindex.model.js" />
+    <Content Include="Scripts\sciendo.query\knockout.simpleGrid.1.3.js" />
     <Content Include="Scripts\sciendo.query\index.viewmodel.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
