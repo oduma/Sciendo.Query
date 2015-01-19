@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Helpers;
+﻿using System.Web;
 using System.Web.Mvc;
-using Sciendo.Query.DataProvider;
+using Sciendo.Query.Contracts;
 using Sciendo.Query.Filters;
-using Sciendo.Query.Models;
 
 namespace Sciendo.Query.Controllers
 {
@@ -22,8 +17,7 @@ namespace Sciendo.Query.Controllers
         [HttpGet]
         public JsonResult Search(string criteria)
         {
-
-            return Json(new ResultsProvider().GetResultRows(criteria), JsonRequestBehavior.AllowGet);
+            return Json(ContainerConfig.Container.Resolve<IResultsProvider>("mockResultsProvider").GetResultRows(criteria), JsonRequestBehavior.AllowGet);
         }
         public ActionResult About()
         {

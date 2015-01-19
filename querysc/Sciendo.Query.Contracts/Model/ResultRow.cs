@@ -1,4 +1,4 @@
-﻿namespace Sciendo.Query.Models
+﻿namespace Sciendo.Query.Contracts.Model
 {
     public class ResultRow
     {

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Sciendo.Query.Models;
+﻿using Sciendo.Query.Contracts;
+using Sciendo.Query.Contracts.Model;
 
-namespace Sciendo.Query.DataProvider
+namespace Sciendo.Query.DataProviders
 {
-    public class ResultsProvider
+    public class MockResultsProvider : IResultsProvider
     {
         public ResultRow[] GetResultRows(string query)
         {

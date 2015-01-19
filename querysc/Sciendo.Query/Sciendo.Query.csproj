@@ -142,15 +142,14 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IOCConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DataProvider\ResultsProvider.cs" />
     <Compile Include="Filters\ValidateHttpAntiForgeryTokenAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ResultRow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +261,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sciendo.IOC\Sciendo.IOC.csproj">
+      <Project>{A88B9C50-7737-4C4C-ABE0-9AA2F4C35F2C}</Project>
+      <Name>Sciendo.IOC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sciendo.Query.Contracts\Sciendo.Query.Contracts.csproj">
+      <Project>{028414F6-E130-4538-87E4-6A2C1B632CD2}</Project>
+      <Name>Sciendo.Query.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sciendo.Query.DataProviders\Sciendo.Query.DataProviders.csproj">
+      <Project>{3D2F60C2-7BD8-40CD-85D3-317756D53C64}</Project>
+      <Name>Sciendo.Query.DataProviders</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
