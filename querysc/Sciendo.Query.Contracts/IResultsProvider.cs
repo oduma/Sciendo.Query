@@ -4,6 +4,6 @@ namespace Sciendo.Query.Contracts
 {
     public interface IResultsProvider
     {
-        ResultRow[] GetResultRows(string query);
+        Doc[] GetResultRows(string query);
     }
 }

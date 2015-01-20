@@ -40,7 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IResultsProvider.cs" />
-    <Compile Include="Model\ResultRow.cs" />
+    <Compile Include="Model\Response.cs" />
+    <Compile Include="Model\ResponseHeader.cs" />
+    <Compile Include="Model\Doc.cs" />
+    <Compile Include="Model\SolrResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
