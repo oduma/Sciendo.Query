@@ -10,7 +10,7 @@ namespace Sciendo.Query.DataProviders
 {
     public class SolrResultsProvider:IResultsProvider
     {
-        public ResultRow[] GetResultRows(string query)
+        public Doc[] GetResultRows(string query)
         {
             throw new NotImplementedException();
         }

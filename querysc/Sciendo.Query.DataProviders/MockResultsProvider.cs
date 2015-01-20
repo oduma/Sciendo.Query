@@ -5,11 +5,11 @@ namespace Sciendo.Query.DataProviders
 {
     public class MockResultsProvider : IResultsProvider
     {
-        public ResultRow[] GetResultRows(string query)
+        public Doc[] GetResultRows(string query)
         {
-            return new ResultRow[]
+            return new Doc[]
             {
-                new ResultRow
+                new Doc
                 {
                     album = "1album",
                     artist = "1artist",
@@ -17,7 +17,7 @@ namespace Sciendo.Query.DataProviders
                     lyrics = "1lyrics",
                     title = "1title"
                 },
-                new ResultRow
+                new Doc
                 {
                     album = "2album",
                     artist = "2artist",
@@ -25,7 +25,7 @@ namespace Sciendo.Query.DataProviders
                     lyrics = "2lyrics",
                     title = "2title"
                 },
-                new ResultRow
+                new Doc
                 {
                     album = "1album",
                     artist = "1artist",
@@ -33,7 +33,7 @@ namespace Sciendo.Query.DataProviders
                     lyrics = "1lyrics",
                     title = "1title"
                 },
-                new ResultRow
+                new Doc
                 {
                     album = "2album",
                     artist = "2artist",
@@ -41,7 +41,7 @@ namespace Sciendo.Query.DataProviders
                     lyrics = "2lyrics",
                     title = "2title"
                 },
-                new ResultRow
+                new Doc
                 {
                     album = "1album",
                     artist = "1artist",
@@ -49,7 +49,7 @@ namespace Sciendo.Query.DataProviders
                     lyrics = "1lyrics",
                     title = "1title"
                 },
-                new ResultRow
+                new Doc
                 {
                     album = "2album",
                     artist = "2artist",
