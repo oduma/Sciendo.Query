@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sciendo.Query", "Sciendo.Query\Sciendo.Query.csproj", "{7BB0369F-8421-4CFF-B675-58BB6A826D4A}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sciendo.IOC", "Sciendo.IOC\Sciendo.IOC.csproj", "{A88B9C50-7737-4C4C-ABE0-9AA2F4C35F2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sciendo.Query.DataProviders", "Sciendo.Query.DataProviders\Sciendo.Query.DataProviders.csproj", "{3D2F60C2-7BD8-40CD-85D3-317756D53C64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sciendo.Query.DataProviders.Tests", "Sciendo.Query.DataProviders.Tests\Sciendo.Query.DataProviders.Tests.csproj", "{733AC688-B611-4F2B-B80C-BE6AC5B6E43C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3D2F60C2-7BD8-40CD-85D3-317756D53C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D2F60C2-7BD8-40CD-85D3-317756D53C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D2F60C2-7BD8-40CD-85D3-317756D53C64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{733AC688-B611-4F2B-B80C-BE6AC5B6E43C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{733AC688-B611-4F2B-B80C-BE6AC5B6E43C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{733AC688-B611-4F2B-B80C-BE6AC5B6E43C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{733AC688-B611-4F2B-B80C-BE6AC5B6E43C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
