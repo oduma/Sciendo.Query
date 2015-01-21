@@ -1,5 +1,7 @@
-﻿using Sciendo.Query.Contracts;
+﻿using Newtonsoft.Json;
+using Sciendo.Query.Contracts;
 using Sciendo.Query.Contracts.Model;
+using System.IO;
 
 namespace Sciendo.Query.DataProviders
 {
@@ -7,59 +9,12 @@ namespace Sciendo.Query.DataProviders
     {
         public Doc[] GetResultRows(string query)
         {
-            return new Doc[]
+            using (var fs = File.OpenText(@"C:\Code\Sciendo\Sciendo.Query\querysc\Sciendo.Query.DataProviders\examplequeryresult.json"))
             {
-                new Doc
-                {
-                    album = "1album",
-                    artist = "1artist",
-                    filePath = "1filePath",
-                    lyrics = "1lyrics",
-                    title = "1title"
-                },
-                new Doc
-                {
-                    album = "2album",
-                    artist = "2artist",
-                    filePath = "2filePath",
-                    lyrics = "2lyrics",
-                    title = "2title"
-                },
-                new Doc
-                {
-                    album = "1album",
-                    artist = "1artist",
-                    filePath = "1filePath",
-                    lyrics = "1lyrics",
-                    title = "1title"
-                },
-                new Doc
-                {
-                    album = "2album",
-                    artist = "2artist",
-                    filePath = "2filePath",
-                    lyrics = "2lyrics",
-                    title = "2title"
-                },
-                new Doc
-                {
-                    album = "1album",
-                    artist = "1artist",
-                    filePath = "1filePath",
-                    lyrics = "1lyrics",
-                    title = "1title"
-                },
-                new Doc
-                {
-                    album = "2album",
-                    artist = "2artist",
-                    filePath = "2filePath",
-                    lyrics = "2lyrics",
-                    title = "2title"
-                }
-
-
-            };
+                var txt = fs.ReadToEnd();
+                var solrResponse = JsonConvert.DeserializeObject<SolrResponse>(txt);
+                return solrResponse.response.docs;
+            }
         }
     }
 }

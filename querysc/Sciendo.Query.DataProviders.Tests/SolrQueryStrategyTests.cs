@@ -15,7 +15,7 @@ namespace Sciendo.Query.DataProviders.Tests
         public void SolrStrategy_ok()
         {
             SolrQueryStrategy solrStrategy = new SolrQueryStrategy();
-            Assert.AreEqual("wt=json&indent=true&defType=edismax&qf=lyrics^10+title^5+album^3+artist^2+file_path^1", solrStrategy.ToString());
+            Assert.AreEqual("wt=json&indent=true&defType=edismax&fl=lyrics+title+album+artist+file_path&qf=lyrics^10+title^5+album^3+artist^2+file_path^1", solrStrategy.ToString());
         }
     }
 }

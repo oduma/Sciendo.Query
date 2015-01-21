@@ -12,7 +12,7 @@ namespace Sciendo.Query.DataProviders.Solr
         public override string ToString()
         {
 
-            return "wt=json&indent=true&defType=edismax&qf=" + string.Join("+", _fieldsBoost.Keys.Select(k=>k+"^"+_fieldsBoost[k]));
+            return "wt=json&indent=true&defType=edismax&fl=" + string.Join("+",_fieldsBoost.Keys) + "&qf=" + string.Join("+", _fieldsBoost.Keys.Where(k=>_fieldsBoost[k]!=0).Select(k=>k+"^"+_fieldsBoost[k]));
         }
     }
 }
