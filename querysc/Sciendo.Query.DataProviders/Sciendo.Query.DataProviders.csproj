@@ -62,9 +62,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="examplequeryresult.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

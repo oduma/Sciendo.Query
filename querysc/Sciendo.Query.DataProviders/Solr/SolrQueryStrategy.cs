@@ -14,6 +14,8 @@ namespace Sciendo.Query.DataProviders.Solr
         { "artist", new FieldProperty { Boost = 2, Highlight = true } }, 
         { "file_path", new FieldProperty { Boost = 1, Highlight = false }},
         { "file_path_id", new FieldProperty{IsId=true}}};
+
+        private string[] facetFields= new []{}
         
         public override string ToString()
         {

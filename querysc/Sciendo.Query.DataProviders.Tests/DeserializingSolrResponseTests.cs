@@ -9,7 +9,6 @@ namespace Sciendo.Query.DataProviders.Tests
         public void Deseralizing_Ok()
         {
             var resultsProvider = new MockResultsProvider();
-            resultsProvider.MockFilePath = @"examplequeryresult.json";
             var result = resultsProvider.GetResultRows("some query");
             Assert.IsNotNull(result);
             Assert.True(result[0].lyrics.Contains("<em>"));
