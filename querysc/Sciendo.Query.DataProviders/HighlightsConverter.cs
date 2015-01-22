@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Sciendo.Query.Contracts.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,12 @@ namespace Sciendo.Query.DataProviders
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             var item = JObject.Load(reader);
-            var something = item.Values();
+            Dictionary<string, Highlighting> highlightings = new Dictionary<string, Highlighting>();
+            foreach(var itemProperty in item.Properties())
+            {
+                var jjj = itemProperty;
+            }
+            var items = item.Properties();
             //var objectTypeId = item["ObjectTypeId"].Value<string>();
             //if (objectTypeId == "Player")
             //{
@@ -41,7 +47,7 @@ namespace Sciendo.Query.DataProviders
         public override bool CanConvert(Type objectType)
         {
 //            return typeof(Character).IsAssignableFrom(objectType);
-            if(objectType.Name=="Highlighting")
+            if(objectType.Name.Contains("Dictionary"))
             {
                 return true;
             }
