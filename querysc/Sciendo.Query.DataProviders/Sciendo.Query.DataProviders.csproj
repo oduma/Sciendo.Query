@@ -49,6 +49,7 @@
     <Compile Include="HighlightsConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MockResultsProvider.cs" />
+    <Compile Include="ResultsProviderBase.cs" />
     <Compile Include="SolrResultsProvider.cs" />
     <Compile Include="Solr\FieldProperty.cs" />
     <Compile Include="Solr\SolRetriever.cs" />

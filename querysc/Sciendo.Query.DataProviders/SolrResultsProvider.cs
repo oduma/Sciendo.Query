@@ -8,9 +8,9 @@ using Sciendo.Query.Contracts.Model;
 
 namespace Sciendo.Query.DataProviders
 {
-    public class SolrResultsProvider:IResultsProvider
+    public class SolrResultsProvider:ResultsProviderBase
     {
-        public Doc[] GetResultRows(string query)
+        public override Doc[] GetResultRows(string query)
         {
             throw new NotImplementedException();
         }

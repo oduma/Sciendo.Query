@@ -1,9 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sciendo.Query.DataProviders.Tests
 {
@@ -14,7 +9,10 @@ namespace Sciendo.Query.DataProviders.Tests
         public void Deseralizing_Ok()
         {
             var resultsProvider = new MockResultsProvider();
+            resultsProvider.MockFilePath = @"examplequeryresult.json";
             var result = resultsProvider.GetResultRows("some query");
+            Assert.IsNotNull(result);
+            Assert.True(result[0].lyrics.Contains("<em>"));
         }
     }
 }

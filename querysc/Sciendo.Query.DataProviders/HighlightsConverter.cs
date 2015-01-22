@@ -22,31 +22,13 @@ namespace Sciendo.Query.DataProviders
             Dictionary<string, Highlighting> highlightings = new Dictionary<string, Highlighting>();
             foreach(var itemProperty in item.Properties())
             {
-                var jjj = itemProperty;
+                var highlighting = JsonConvert.DeserializeObject<Highlighting>(itemProperty.Value.ToString());
+                highlightings.Add(itemProperty.Name,highlighting);
             }
-            var items = item.Properties();
-            //var objectTypeId = item["ObjectTypeId"].Value<string>();
-            //if (objectTypeId == "Player")
-            //{
-            //    var obj = item.ToObject<Player>();
-            //    var objAction = ObjectActionsFactory.CreateObjectAction(objectTypeId);
-            //    obj.AllowsTemplateAction = objAction.AllowsTemplateAction;
-            //    obj.AllowsIndirectTemplateAction = objAction.AllowsIndirectTemplateAction;
-            //    return obj;
-            //}
-            //else
-            //{
-            //    var obj = item.ToObject<Character>();
-            //    var objAction = ObjectActionsFactory.CreateObjectAction(objectTypeId);
-            //    obj.AllowsTemplateAction = objAction.AllowsTemplateAction;
-            //    obj.AllowsIndirectTemplateAction = objAction.AllowsIndirectTemplateAction;
-            //    return obj;
-            //}
-            return null;
+            return highlightings;
         }
         public override bool CanConvert(Type objectType)
         {
-//            return typeof(Character).IsAssignableFrom(objectType);
             if(objectType.Name.Contains("Dictionary"))
             {
                 return true;

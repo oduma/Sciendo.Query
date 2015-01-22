@@ -1,65 +1,26 @@
-﻿using Sciendo.Query.Contracts;
+﻿using System;
+using System.IO;
+using Newtonsoft.Json;
+using Sciendo.Query.Contracts;
 using Sciendo.Query.Contracts.Model;
 
 namespace Sciendo.Query.DataProviders
 {
-    public class MockResultsProvider : IResultsProvider
+    public class MockResultsProvider : ResultsProviderBase
     {
-        public Doc[] GetResultRows(string query)
+        public string MockFilePath { private get; set; }
+        public override Doc[] GetResultRows(string query)
         {
-            return new Doc[]
+            var dir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"App_data");
+            if (string.IsNullOrEmpty(MockFilePath))
+                MockFilePath =
+                    Path.Combine(dir,"examplequeryresult.json");
+            using (var fs = File.OpenText(MockFilePath))
             {
-                new Doc
-                {
-                    album = "1album",
-                    artist = "1artist",
-                    filePath = "1filePath",
-                    lyrics = "1lyrics",
-                    title = "1title"
-                },
-                new Doc
-                {
-                    album = "2album",
-                    artist = "2artist",
-                    filePath = "2filePath",
-                    lyrics = "2lyrics",
-                    title = "2title"
-                },
-                new Doc
-                {
-                    album = "1album",
-                    artist = "1artist",
-                    filePath = "1filePath",
-                    lyrics = "1lyrics",
-                    title = "1title"
-                },
-                new Doc
-                {
-                    album = "2album",
-                    artist = "2artist",
-                    filePath = "2filePath",
-                    lyrics = "2lyrics",
-                    title = "2title"
-                },
-                new Doc
-                {
-                    album = "1album",
-                    artist = "1artist",
-                    filePath = "1filePath",
-                    lyrics = "1lyrics",
-                    title = "1title"
-                },
-                new Doc
-                {
-                    album = "2album",
-                    artist = "2artist",
-                    filePath = "2filePath",
-                    lyrics = "2lyrics",
-                    title = "2title"
-                }
-
-
-            };
+                var txt = fs.ReadToEnd();
+                var solrResponse = JsonConvert.DeserializeObject<SolrResponse>(txt, new HighlightsConverter());
+                return ApplyHighlights(solrResponse);
+            }            
         }
     }
 }
