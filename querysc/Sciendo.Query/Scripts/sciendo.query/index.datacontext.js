@@ -10,7 +10,7 @@
             var grdModel = new ko.simpleGrid.viewModel({
                 data: data,
                 columns: [
-                    { headerText: "File Path", rowText: "filePath" },
+                    { headerText: "File Path", rowText: "file_path" },
                     { headerText: "Album", rowText: "album" },
                     { headerText: "Artist", rowText: "artist" },
                     { headerText: "Title", rowText: "title" },
