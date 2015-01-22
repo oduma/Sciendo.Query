@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HighlightsConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MockResultsProvider.cs" />
     <Compile Include="SolrResultsProvider.cs" />
+    <Compile Include="Solr\FieldProperty.cs" />
     <Compile Include="Solr\SolRetriever.cs" />
     <Compile Include="Solr\SolrQueryStrategy.cs" />
   </ItemGroup>

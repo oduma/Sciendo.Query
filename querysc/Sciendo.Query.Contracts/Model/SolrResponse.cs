@@ -11,5 +11,8 @@ namespace Sciendo.Query.Contracts.Model
         public ResponseHeader responseHeader { get; set; }
 
         public Response response { get; set; }
+
+        public Dictionary<string,Highlighting> highlighting { get; set; }
+
     }
 }

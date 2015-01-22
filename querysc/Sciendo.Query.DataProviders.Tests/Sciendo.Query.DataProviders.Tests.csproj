@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeserializingSolrResponseTests.cs" />
     <Compile Include="SolrQueryStrategyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,6 +54,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sciendo.Query.Contracts\Sciendo.Query.Contracts.csproj">
+      <Project>{028414f6-e130-4538-87e4-6a2c1b632cd2}</Project>
+      <Name>Sciendo.Query.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sciendo.Query.DataProviders\Sciendo.Query.DataProviders.csproj">
       <Project>{3d2f60c2-7bd8-40cd-85d3-317756d53c64}</Project>
       <Name>Sciendo.Query.DataProviders</Name>

@@ -12,7 +12,7 @@ namespace Sciendo.Query.DataProviders
             using (var fs = File.OpenText(@"C:\Code\Sciendo\Sciendo.Query\querysc\Sciendo.Query.DataProviders\examplequeryresult.json"))
             {
                 var txt = fs.ReadToEnd();
-                var solrResponse = JsonConvert.DeserializeObject<SolrResponse>(txt);
+                var solrResponse = JsonConvert.DeserializeObject<SolrResponse>(txt, new HighlightsConverter());
                 return solrResponse.response.docs;
             }
         }
