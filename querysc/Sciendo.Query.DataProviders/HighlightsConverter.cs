@@ -26,6 +26,13 @@ namespace Sciendo.Query.DataProviders
 
         private static object ReadFacetFields(JsonReader reader)
         {
+            var item = JObject.Load(reader);
+
+            Dictionary<string, int> facetField = new Dictionary<string, int>();
+            foreach (var itemProperty in item.Properties())
+            {
+            }
+
             return null;
         }
 
