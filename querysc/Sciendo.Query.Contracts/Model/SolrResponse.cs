@@ -14,5 +14,7 @@ namespace Sciendo.Query.Contracts.Model
 
         public Dictionary<string,Highlighting> highlighting { get; set; }
 
+        //public Facets facet_counts { get; set; }
+
     }
 }

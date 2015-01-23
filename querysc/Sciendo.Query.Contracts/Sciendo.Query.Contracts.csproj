@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IResultsProvider.cs" />
+    <Compile Include="Model\FacetFields.cs" />
+    <Compile Include="Model\Facets.cs" />
     <Compile Include="Model\Highlighting.cs" />
     <Compile Include="Model\Response.cs" />
     <Compile Include="Model\ResponseHeader.cs" />

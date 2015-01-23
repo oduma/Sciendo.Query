@@ -18,12 +18,25 @@ namespace Sciendo.Query.DataProviders
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            if (objectType.GenericTypeArguments[1].Name == "Highlighting")
+                return ReadHighlighting(reader);
+            else
+                return ReadFacetFields(reader);
+        }
+
+        private static object ReadFacetFields(JsonReader reader)
+        {
+            return null;
+        }
+
+        private static object ReadHighlighting(JsonReader reader)
+        {
             var item = JObject.Load(reader);
             Dictionary<string, Highlighting> highlightings = new Dictionary<string, Highlighting>();
-            foreach(var itemProperty in item.Properties())
+            foreach (var itemProperty in item.Properties())
             {
                 var highlighting = JsonConvert.DeserializeObject<Highlighting>(itemProperty.Value.ToString());
-                highlightings.Add(itemProperty.Name,highlighting);
+                highlightings.Add(itemProperty.Name, highlighting);
             }
             return highlightings;
         }
