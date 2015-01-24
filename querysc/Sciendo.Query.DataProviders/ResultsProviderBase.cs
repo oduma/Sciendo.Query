@@ -11,11 +11,47 @@ namespace Sciendo.Query.DataProviders
 {
     public abstract class ResultsProviderBase:IResultsProvider
     {
-        public abstract ResultsPackage GetResultRows(string query);
+        public abstract ResultsPackage GetResultsPackage(string query);
 
         protected Dictionary<string, Dictionary<string, int>> GetFacetFields(SolrResponse solrResponse)
         {
-            throw new NotImplementedException();
+            if(solrResponse==null || solrResponse.facet_counts==null || solrResponse.facet_counts.facet_fields==null)
+                return null;
+            Dictionary<string,Dictionary<string,int>> facetFields = new Dictionary<string,Dictionary<string,int>>();
+
+            facetFields.Add("Artists", GetFacetField(solrResponse.facet_counts.facet_fields.artist_f));
+            facetFields.Add("Extensions", GetFacetField(solrResponse.facet_counts.facet_fields.extension_f));
+            facetFields.Add("Letters", GetFacetField(solrResponse.facet_counts.facet_fields.letter_catalog_f));
+            return facetFields;
+        }
+
+        private Dictionary<string, int> GetFacetField(object[] fieldFacet)
+        {
+
+            if (fieldFacet != null || fieldFacet.Any())
+            {
+                var facetField = new Dictionary<string, int>();
+                var newKey = string.Empty;
+                var newValue = 0;
+                for (int i = 0; i < fieldFacet.Length; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        newKey = (string)((fieldFacet[i]) ?? "Unknown");
+                        newValue = 0;
+                    }
+                    else
+                        newValue = Convert.ToInt32(fieldFacet[i]);
+
+                    if (newValue != 0)
+                    {
+                        facetField.Add(newKey, newValue);
+                        newKey = string.Empty;
+                    }
+                }
+                return facetField;
+            }
+            return null;
         }
 
         protected Doc[] ApplyHighlights(SolrResponse response)

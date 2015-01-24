@@ -23,7 +23,7 @@ namespace Sciendo.Query.Controllers
                 Json(
                     ContainerConfig.Container.Resolve<IResultsProvider>(
                         ((QueryConfigurationSection) ConfigurationManager.GetSection("query")).CurrentDataProvider)
-                        .GetResultRows(criteria), JsonRequestBehavior.AllowGet);
+                        .GetResultsPackage(criteria), JsonRequestBehavior.AllowGet);
         }
         public ActionResult About()
         {

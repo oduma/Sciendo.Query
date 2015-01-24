@@ -9,7 +9,7 @@ namespace Sciendo.Query.DataProviders
 {
     public class MockResultsProvider : ResultsProviderBase
     {
-        public override ResultsPackage GetResultRows(string query)
+        public override ResultsPackage GetResultsPackage(string query)
         {
             var dir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"App_data");
             var mockFilePath =
