@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Sciendo.Query.Contracts.Model
+namespace Sciendo.Query.DataProviders.Solr
 {
     public class SolrResponse
     {
@@ -14,7 +10,7 @@ namespace Sciendo.Query.Contracts.Model
 
         public Dictionary<string,Highlighting> highlighting { get; set; }
 
-        //public Facets facet_counts { get; set; }
+        public Facets facet_counts { get; set; }
 
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Sciendo.Query.Contracts.Model
 {
-    public class ResponseHeader
+    public class ResultsPackage
     {
-        public int status { get; set; }
-        public int QTime { get; set; }
+        public Doc[] ResultRows { get; set; }
+        public Dictionary<string, Dictionary<string, int>> FacetFields { get; set; } 
     }
 }

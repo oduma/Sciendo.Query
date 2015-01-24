@@ -46,14 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HighlightsConverter.cs" />
+    <Compile Include="DictionariesConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MockResultsProvider.cs" />
     <Compile Include="ResultsProviderBase.cs" />
     <Compile Include="SolrResultsProvider.cs" />
+    <Compile Include="Solr\FacetFields.cs" />
+    <Compile Include="Solr\Facets.cs" />
     <Compile Include="Solr\FieldProperty.cs" />
+    <Compile Include="Solr\Highlighting.cs" />
+    <Compile Include="Solr\Response.cs" />
+    <Compile Include="Solr\ResponseHeader.cs" />
     <Compile Include="Solr\SolRetriever.cs" />
     <Compile Include="Solr\SolrQueryStrategy.cs" />
+    <Compile Include="Solr\SolrResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sciendo.Query.Contracts\Sciendo.Query.Contracts.csproj">

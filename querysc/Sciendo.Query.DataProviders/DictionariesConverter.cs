@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sciendo.Query.DataProviders.Solr;
 
 namespace Sciendo.Query.DataProviders
 {
-    public class HighlightsConverter : JsonConverter
+    public class DictionariesConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
@@ -20,20 +21,31 @@ namespace Sciendo.Query.DataProviders
         {
             if (objectType.GenericTypeArguments[1].Name == "Highlighting")
                 return ReadHighlighting(reader);
-            else
+            if(objectType.GenericTypeArguments[1].Name == "Int32")
                 return ReadFacetFields(reader);
+            return null;
         }
 
         private static object ReadFacetFields(JsonReader reader)
         {
-            var item = JObject.Load(reader);
-
-            Dictionary<string, int> facetField = new Dictionary<string, int>();
-            foreach (var itemProperty in item.Properties())
+            try
             {
-            }
+                var item = JObject.Load(reader);
 
-            return null;
+                Dictionary<string, int> facetField = new Dictionary<string, int>();
+                foreach (var itemProperty in item.Properties())
+                {
+                    string key = (itemProperty.Name) ?? "Unknown";
+                    facetField.Add(key, (int)itemProperty.Value);
+                }
+
+                return facetField;
+
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private static object ReadHighlighting(JsonReader reader)

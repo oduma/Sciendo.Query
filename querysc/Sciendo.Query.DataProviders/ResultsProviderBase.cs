@@ -5,12 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Sciendo.Query.Contracts;
 using Sciendo.Query.Contracts.Model;
+using Sciendo.Query.DataProviders.Solr;
 
 namespace Sciendo.Query.DataProviders
 {
     public abstract class ResultsProviderBase:IResultsProvider
     {
-        public abstract Doc[] GetResultRows(string query);
+        public abstract ResultsPackage GetResultRows(string query);
+
+        protected Dictionary<string, Dictionary<string, int>> GetFacetFields(SolrResponse solrResponse)
+        {
+            throw new NotImplementedException();
+        }
 
         protected Doc[] ApplyHighlights(SolrResponse response)
         {
