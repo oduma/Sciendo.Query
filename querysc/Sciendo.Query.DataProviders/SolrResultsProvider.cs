@@ -14,5 +14,10 @@ namespace Sciendo.Query.DataProviders
         {
             throw new NotImplementedException();
         }
+
+        public override ResultsPackage GetFilteredResultsPackage(string criteria, string facetFieldName, string facetFieldValue)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

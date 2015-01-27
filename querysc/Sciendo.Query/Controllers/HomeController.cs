@@ -25,6 +25,16 @@ namespace Sciendo.Query.Controllers
                         ((QueryConfigurationSection) ConfigurationManager.GetSection("query")).CurrentDataProvider)
                         .GetResultsPackage(criteria), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public JsonResult Filter(string criteria, string facetFieldName, string facetFieldValue)
+        {
+            return
+                Json(
+                    ContainerConfig.Container.Resolve<IResultsProvider>(
+                        ((QueryConfigurationSection)ConfigurationManager.GetSection("query")).CurrentDataProvider)
+                        .GetFilteredResultsPackage(criteria,facetFieldName, facetFieldValue), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Search tool for music collection";

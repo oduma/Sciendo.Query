@@ -9,8 +9,10 @@
 }
 <h3>Results</h3>
 <p class="error" data-bind="text: error"></p>
+<!--<button value="Show all" data-bind="visible:facetFiltered(), click:getResults" />-->
 <div data-bind="with: resultData">
     <p data-bind="text: message"></p>
+        <input type= "button" value="Show All" data-bind="visible:$root.facetFiltered, click: $root.getResults"/>
         <div class="all-facets" data-bind="if:$root.hasFacets()">
         <div class="facet-titles-row">
             <div class="facet-title" data-bind="text: fields[0].Name"></div>
@@ -19,14 +21,14 @@
         </div>
         <div class="facet-row">
             <div class="facet-cell" data-bind="foreach: fields[0].Values">
-                <p><input type="radio" data-bind="value:Key, checked: $root.selectedFacetValue, click:$root.facetSelected"/><span data-bind="text: ' ' + Key +' ('+ Count+')'"/></p>
+                <p><input type="radio" data-bind="value:Key, checked: $root.selectedFacetValue, click:$root.artistFacetSelected"/><span data-bind="text: ' ' + Key +' ('+ Count+')'"/></p>
             </div>
             <div class="facet-cell" data-bind="foreach: fields[1].Values">
-                <p><input type="radio" data-bind="checkedValue: Key" /><span data-bind="text: ' ' + Key +' ('+ Count+')'" /></p>
+                <p><input type="radio" data-bind="value:Key, checked: $root.selectedFacetValue, click:$root.extensionFacetSelected" /><span data-bind="text: ' ' + Key +' ('+ Count+')'" /></p>
             </div>
 
             <div class="facet-cell" data-bind="foreach: fields[2].Values">
-                <p><input type="radio" data-bind="checkedValue: Key" /><span data-bind="text: ' ' + Key +' ('+ Count+')'" /></p>
+                <p><input type="radio" data-bind="value:Key, checked: $root.selectedFacetValue, click:$root.letterFacetSelected" /><span data-bind="text: ' ' + Key +' ('+ Count+')'" /></p>
             </div>
 
         </div>

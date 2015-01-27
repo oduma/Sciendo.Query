@@ -64,5 +64,9 @@ namespace Sciendo.Query.DataProviders
                         file_path = d.file_path
                     }).ToArray();
         }
+
+
+
+        public abstract ResultsPackage GetFilteredResultsPackage(string criteria, string facetFieldName, string facetFieldValue);
     }
 }

@@ -1,9 +1,8 @@
 ﻿function datacontext() {
 
     var self = this;
-    self.filterByFacet = function (query, resultObservable, errorObservable, selectedFacetObservable) {
-        var facetFields = resultObservable().fields;
-        return ajaxRequest("get", solrFilterUrl(query(),selectedFacetObservable()))
+    self.filterByFacet = function (query, resultObservable, errorObservable, filterFieldName, selectedFacetObservable, facetFilteredObservable) {
+        return ajaxRequest("get", solrFilterUrl(query(),filterFieldName, selectedFacetObservable()))
             .done(getSucceeded)
             .fail(getFailed);
 
@@ -19,18 +18,21 @@
                 ], pageSize: 4
             });
 
-            resultObservable({ message: "Ok", fields: facetFields, resultRows: data.ResultRows, gridViewModel: grdModel });
+            resultObservable({ message: "Ok", fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel });
 
             errorObservable();
+
+            facetFilteredObservable(true);
 
         }
         function getFailed() {
             errorObservable("Error retrieving results.");
             resultObservable({ message: "Not Ok"});
+            facetFilteredObservable(false);
 
         }
     }
-    self.doSearch=function (query, resultObservable, errorObservable) {
+    self.doSearch=function (query, resultObservable, errorObservable,facetFilteredObservable) {
         return ajaxRequest("get", solrUrl(query()))
             .done(getSucceeded)
             .fail(getFailed);
@@ -49,11 +51,15 @@
             resultObservable({ message: "Ok", fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel});
 
             errorObservable();
+
+            facetFilteredObservable(false);
         }
 
         function getFailed() {
             errorObservable("Error retrieving results.");
             resultObservable({ message: "Not Ok" });
+            facetFilteredObservable(false);
+
         }
     }
     function createResultRow(data) {
@@ -82,6 +88,6 @@
     // routes
     function solrUrl(id) { return "/home/search?criteria=" + (id || ""); }
 
-    function solrFilterUrl(id,facetId) { return "/home/filter?criteria=" + (id || "") + "&facet=" +(facetId||""); }
+    function solrFilterUrl(id, facetName, facetId) { return "/home/filter?criteria=" + (id || "") + "&facetFieldName=" + (facetName || "") + "&facetFieldValue=" + (facetId || ""); }
 
 };
