@@ -13,10 +13,10 @@ namespace Sciendo.Query.DataProviders.Tests
             var result = resultsProvider.GetResultsPackage("some query");
             Assert.IsNotNull(result);
             Assert.True(result.ResultRows[0].lyrics.Contains("<em>"));
-            Assert.AreEqual(3, result.FacetFields.Keys.Count);
-            Assert.True(result.FacetFields["Artists"].Keys.Any());
-            Assert.True(result.FacetFields["Extensions"].Keys.Any());
-            Assert.True(result.FacetFields["Letters"].Keys.Any());
+            Assert.AreEqual(3, result.Fields.Length);
+            Assert.True(result.Fields[0].Values.Any());
+            Assert.True(result.Fields[1].Values.Any());
+            Assert.True(result.Fields[2].Values.Any());
         }
     }
 }

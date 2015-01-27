@@ -22,7 +22,7 @@ namespace Sciendo.Query.DataProviders
                 return new ResultsPackage
                 {
                     ResultRows = ApplyHighlights(solrResponse),
-                    FacetFields = GetFacetFields(solrResponse)
+                    Fields = GetFields(solrResponse)
                 };
             }            
         }

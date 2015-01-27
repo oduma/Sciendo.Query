@@ -9,6 +9,6 @@ namespace Sciendo.Query.Contracts.Model
     public class ResultsPackage
     {
         public Doc[] ResultRows { get; set; }
-        public Dictionary<string, Dictionary<string, int>> FacetFields { get; set; } 
+        public Field[] Fields { get; set; } 
     }
 }

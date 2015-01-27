@@ -331,6 +331,49 @@ aside {
     font-weight: 700;
 }
 
+.all-facets
+    {
+        display:  table;
+        width:auto;
+        background-color:#eee;
+        border:1px solid  #666666;
+        border-spacing:5px;/*cellspacing:poor IE support for  this*/
+       /* border-collapse:separate;*/
+    }
+
+    .facet-titles-row
+    {
+       display:table-row;
+       width:auto;
+       font-weight:bold;
+    }
+
+    .facet-row
+    {
+       display:table-row;
+       width:auto;
+    }
+
+    .facet-title
+    {
+        float:left;/*fix for  buggy browsers*/
+        display:table-column;
+        width:200px;
+        background-color:#ccc;
+       
+    }
+
+    .facet-cell
+    {
+        float:left;/*fix for  buggy browsers*/
+        display:table-column;
+        width:200px!important;
+        height:200px;
+        background-color:#ccc;
+        overflow-y:scroll;
+       
+    }
+
 /* login page */
 #loginForm {
     border-right: solid 2px #c8c8c8;
@@ -446,6 +489,12 @@ textarea {
         border: 1px solid #7ac0da;
     }
 
+    input[type="radio"]
+    {
+        background:inherit;
+        width:auto;
+        margin-left:4px;
+    }
     input[type="checkbox"] {
         background: transparent;
         border: inherit;

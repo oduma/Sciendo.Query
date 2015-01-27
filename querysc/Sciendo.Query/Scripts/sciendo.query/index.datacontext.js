@@ -1,14 +1,15 @@
 ﻿function datacontext() {
 
     var self = this;
-    self.doSearch=function (query, resultObservable, errorObservable) {
-        return ajaxRequest("get", solrUrl(query()))
+    self.filterByFacet = function (query, resultObservable, errorObservable, selectedFacetObservable) {
+        var facetFields = resultObservable().fields;
+        return ajaxRequest("get", solrFilterUrl(query(),selectedFacetObservable()))
             .done(getSucceeded)
             .fail(getFailed);
 
         function getSucceeded(data) {
             var grdModel = new ko.simpleGrid.viewModel({
-                data: data,
+                data: data.ResultRows,
                 columns: [
                     { headerText: "File Path", rowText: "file_path" },
                     { headerText: "Album", rowText: "album" },
@@ -17,7 +18,35 @@
                     { headerText: "Lyrics", rowText: "lyrics" }
                 ], pageSize: 4
             });
-            resultObservable({ message: "Ok", resultRows: data ,gridViewModel:grdModel});
+
+            resultObservable({ message: "Ok", fields: facetFields, resultRows: data.ResultRows, gridViewModel: grdModel });
+
+            errorObservable();
+
+        }
+        function getFailed() {
+            errorObservable("Error retrieving results.");
+            resultObservable({ message: "Not Ok"});
+
+        }
+    }
+    self.doSearch=function (query, resultObservable, errorObservable) {
+        return ajaxRequest("get", solrUrl(query()))
+            .done(getSucceeded)
+            .fail(getFailed);
+
+        function getSucceeded(data) {
+            var grdModel = new ko.simpleGrid.viewModel({
+                data: data.ResultRows,
+                columns: [
+                    { headerText: "File Path", rowText: "file_path" },
+                    { headerText: "Album", rowText: "album" },
+                    { headerText: "Artist", rowText: "artist" },
+                    { headerText: "Title", rowText: "title" },
+                    { headerText: "Lyrics", rowText: "lyrics" }
+                ], pageSize: 4
+            });
+            resultObservable({ message: "Ok", fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel});
 
             errorObservable();
         }
@@ -52,4 +81,7 @@
     }
     // routes
     function solrUrl(id) { return "/home/search?criteria=" + (id || ""); }
+
+    function solrFilterUrl(id,facetId) { return "/home/filter?criteria=" + (id || "") + "&facet=" +(facetId||""); }
+
 };

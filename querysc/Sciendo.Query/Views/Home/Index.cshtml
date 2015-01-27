@@ -11,6 +11,26 @@
 <p class="error" data-bind="text: error"></p>
 <div data-bind="with: resultData">
     <p data-bind="text: message"></p>
+        <div class="all-facets" data-bind="if:$root.hasFacets()">
+        <div class="facet-titles-row">
+            <div class="facet-title" data-bind="text: fields[0].Name"></div>
+            <div class="facet-title" data-bind="text: fields[1].Name"></div>
+            <div class="facet-title" data-bind="text: fields[2].Name"></div>
+        </div>
+        <div class="facet-row">
+            <div class="facet-cell" data-bind="foreach: fields[0].Values">
+                <p><input type="radio" data-bind="value:Key, checked: $root.selectedFacetValue, click:$root.facetSelected"/><span data-bind="text: ' ' + Key +' ('+ Count+')'"/></p>
+            </div>
+            <div class="facet-cell" data-bind="foreach: fields[1].Values">
+                <p><input type="radio" data-bind="checkedValue: Key" /><span data-bind="text: ' ' + Key +' ('+ Count+')'" /></p>
+            </div>
+
+            <div class="facet-cell" data-bind="foreach: fields[2].Values">
+                <p><input type="radio" data-bind="checkedValue: Key" /><span data-bind="text: ' ' + Key +' ('+ Count+')'" /></p>
+            </div>
+
+        </div>
+    </div>
     <div data-bind="simpleGrid:gridViewModel"></div>
 </div>
 

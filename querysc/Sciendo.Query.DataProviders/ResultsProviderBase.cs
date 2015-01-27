@@ -13,24 +13,21 @@ namespace Sciendo.Query.DataProviders
     {
         public abstract ResultsPackage GetResultsPackage(string query);
 
-        protected Dictionary<string, Dictionary<string, int>> GetFacetFields(SolrResponse solrResponse)
+        protected Field[] GetFields(SolrResponse solrResponse)
         {
             if(solrResponse==null || solrResponse.facet_counts==null || solrResponse.facet_counts.facet_fields==null)
                 return null;
-            Dictionary<string,Dictionary<string,int>> facetFields = new Dictionary<string,Dictionary<string,int>>();
-
-            facetFields.Add("Artists", GetFacetField(solrResponse.facet_counts.facet_fields.artist_f));
-            facetFields.Add("Extensions", GetFacetField(solrResponse.facet_counts.facet_fields.extension_f));
-            facetFields.Add("Letters", GetFacetField(solrResponse.facet_counts.facet_fields.letter_catalog_f));
-            return facetFields;
+            return new Field[] {new Field{Name="Artists", Values=GetFacetField(solrResponse.facet_counts.facet_fields.artist_f).Where(a=>a!=null).ToArray()},
+            new Field{Name="Extensions", Values=GetFacetField(solrResponse.facet_counts.facet_fields.extension_f).Where(a=>a!=null).ToArray()},
+            new Field{Name="Letters", Values=GetFacetField(solrResponse.facet_counts.facet_fields.letter_catalog_f).Where(a=>a!=null).ToArray()}
+        };
         }
 
-        private Dictionary<string, int> GetFacetField(object[] fieldFacet)
+        private IEnumerable<FieldValue> GetFacetField(object[] fieldFacet)
         {
 
             if (fieldFacet != null || fieldFacet.Any())
             {
-                var facetField = new Dictionary<string, int>();
                 var newKey = string.Empty;
                 var newValue = 0;
                 for (int i = 0; i < fieldFacet.Length; i++)
@@ -45,13 +42,12 @@ namespace Sciendo.Query.DataProviders
 
                     if (newValue != 0)
                     {
-                        facetField.Add(newKey, newValue);
+                        yield return new FieldValue { Key = newKey, Count = newValue };
                         newKey = string.Empty;
                     }
                 }
-                return facetField;
             }
-            return null;
+            yield return null;
         }
 
         protected Doc[] ApplyHighlights(SolrResponse response)

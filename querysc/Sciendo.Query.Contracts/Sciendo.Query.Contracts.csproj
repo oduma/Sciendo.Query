@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="IResultsProvider.cs" />
     <Compile Include="Model\Doc.cs" />
+    <Compile Include="Model\Field.cs" />
+    <Compile Include="Model\FieldValue.cs" />
     <Compile Include="Model\ResultsPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
