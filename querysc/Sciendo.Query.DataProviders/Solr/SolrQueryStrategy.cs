@@ -12,6 +12,12 @@ namespace Sciendo.Query.DataProviders.Solr
             _query = query;
         }
 
+        public SolrQueryStrategy(string query,string filterField, string filterValue):this(query)
+        {
+            _filterField=filterField;
+            _filterValue=filterValue;
+        }
+
         private Dictionary<string, FieldProperty> _outputFields = new Dictionary<string, FieldProperty> { 
         { "lyrics", new FieldProperty { Boost = 10, Highlight = true } }, 
         { "title", new FieldProperty { Boost = 5, Highlight = true } }, 
@@ -22,6 +28,8 @@ namespace Sciendo.Query.DataProviders.Solr
 
         private string[] _facetFields = new[] { "artist_f", "extension_f", "letter_catalog_f" };
         private readonly string _query;
+        private readonly string _filterField;
+        private readonly string _filterValue;
 
         
         public string GetQueryString()
@@ -35,12 +43,13 @@ namespace Sciendo.Query.DataProviders.Solr
                 + "&facet=true&facet.mincount=1&facet.missing=true&facet.field=" + string.Join("&facet.field=", _facetFields);
         }
 
-        public string GetFilterString(string filterField, string filterValue)
+        public string GetFilterString()
         {
             var temp=GetQueryString();
-
-            if (!string.IsNullOrEmpty(filterField)&&!string.IsNullOrEmpty(filterValue))
-                temp="fq="+filterField+":\""+filterValue+"\"&"+temp;
+            if (string.IsNullOrEmpty(temp))
+                return temp;
+            if (!string.IsNullOrEmpty(_filterField)&&!string.IsNullOrEmpty(_filterValue))
+                temp="fq="+_filterField+":\""+_filterValue+"\"&"+temp;
             return temp;
         }
 

@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 
-namespace Sciendo.Query
+namespace Sciendo.Query.DataProviders
 {
     public class QueryConfigurationSection:ConfigurationSection
     {
@@ -18,6 +18,19 @@ namespace Sciendo.Query
             set
             {
                 this["currentDataProvider"] = value;
+            }
+        }
+
+        [ConfigurationProperty("solrConnectionString", DefaultValue = "", IsRequired = false)]
+        public string SolrConnectionString
+        {
+            get
+            {
+                return (string)this["solrConnectionString"];
+            }
+            set
+            {
+                this["solrConnectionString"] = value;
             }
         }
 

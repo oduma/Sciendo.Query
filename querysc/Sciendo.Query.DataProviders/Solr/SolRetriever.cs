@@ -11,10 +11,10 @@ namespace Sciendo.Query.DataProviders.Solr
 {
     public static class SolRetriever
     {
-        public static SolrResponse TryQuery(string url, string query, SolrQueryStrategy solrQueryStrategy)
+        public static SolrResponse TryQuery(string url, Func<string> queryStringProvider)
         {
             HttpClient httpClient = new HttpClient();
-            using (var getTask = httpClient.GetStringAsync(new Uri(url+"?" +solrQueryStrategy))
+            using (var getTask = httpClient.GetStringAsync(new Uri(url+"?" +queryStringProvider()))
                 .ContinueWith((p) => p).Result)
             {
                 if (getTask.Status == TaskStatus.RanToCompletion || !string.IsNullOrEmpty(getTask.Result))
