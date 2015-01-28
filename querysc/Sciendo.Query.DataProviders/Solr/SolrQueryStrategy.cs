@@ -7,12 +7,14 @@ namespace Sciendo.Query.DataProviders.Solr
 {
     public class SolrQueryStrategy
     {
-        public SolrQueryStrategy(string query)
+        public SolrQueryStrategy(string query, int numRows, int startRow)
         {
             _query = query;
+            _numRows = numRows;
+            _startRow = startRow;
         }
 
-        public SolrQueryStrategy(string query,string filterField, string filterValue):this(query)
+        public SolrQueryStrategy(string query,int numRows, int startRow, string filterField, string filterValue):this(query, numRows, startRow)
         {
             _filterField=filterField;
             _filterValue=filterValue;
@@ -30,13 +32,16 @@ namespace Sciendo.Query.DataProviders.Solr
         private readonly string _query;
         private readonly string _filterField;
         private readonly string _filterValue;
+        private readonly int _numRows;
+        private readonly int _startRow;
 
         
         public string GetQueryString()
         {
             if (string.IsNullOrEmpty(_query))
                 return null;
-            return "q="+_query+"&wt=json&indent=true&stopwords=true&lowercaseOperators=true&defType=edismax&fl=" 
+            return "q="+_query +"&rows="+_numRows +"&start="+_startRow
+                +"&wt=json&indent=true&stopwords=true&lowercaseOperators=true&defType=edismax&fl=" 
                 + string.Join("+",_outputFields.Keys) 
                 + "&qf=" + string.Join("+", _outputFields.Where(o=>o.Value.Boost.HasValue).Select(o=>o.Key+"^"+o.Value.Boost))
                 + "&hl=true&hl.simple.pre=<em>&hl.simple.post=<%2Fem>&hl.requireFieldMatch=false&hl.highlightMultiTerm=true&hl.fl=" + string.Join("+",_outputFields.Where(o=>o.Value.Highlight).Select(o=>o.Key))

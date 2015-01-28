@@ -15,20 +15,10 @@
         // Defines a view model class you can use to populate a grid
         viewModel: function (configuration) {
             this.data = configuration.data;
-            this.currentPageIndex = ko.observable(0);
-            this.pageSize = configuration.pageSize || 5;
 
             // If you don't specify columns configuration, we'll use scaffolding
             this.columns = configuration.columns || getColumnsForScaffolding(ko.utils.unwrapObservable(this.data));
 
-            this.itemsOnCurrentPage = ko.computed(function () {
-                var startIndex = this.pageSize * this.currentPageIndex();
-                return ko.utils.unwrapObservable(this.data).slice(startIndex, startIndex + this.pageSize);
-            }, this);
-
-            this.maxPageIndex = ko.computed(function () {
-                return Math.ceil(ko.utils.unwrapObservable(this.data).length / this.pageSize) - 1;
-            }, this);
         }
     };
 
@@ -46,20 +36,20 @@
                                <th data-bind=\"text: headerText\"></th>\
                             </tr>\
                         </thead>\
-                        <tbody data-bind=\"foreach: itemsOnCurrentPage\">\
+                        <tbody data-bind=\"foreach: data\">\
                            <tr data-bind=\"foreach: $parent.columns\">\
                                <td data-bind=\"html: typeof rowText == 'function' ? rowText($parent) : $parent[rowText] \"></td>\
                             </tr>\
                         </tbody>\
                     </table>");
-    templateEngine.addTemplate("ko_simpleGrid_pageLinks", "\
-                    <div class=\"ko-grid-pageLinks\">\
-                        <span>Page:</span>\
-                        <!-- ko foreach: ko.utils.range(0, maxPageIndex) -->\
-                               <a href=\"#\" data-bind=\"text: $data + 1, click: function() { $root.currentPageIndex($data) }, css: { selected: $data == $root.currentPageIndex() }\">\
-                            </a>\
-                        <!-- /ko -->\
-                    </div>");
+    //templateEngine.addTemplate("ko_simpleGrid_pageLinks", "\
+    //                <div class=\"ko-grid-pageLinks\">\
+    //                    <span>Page:</span>\
+    //                    <!-- ko foreach: ko.utils.range(0, maxPageIndex) -->\
+    //                           <a href=\"#\" data-bind=\"text: $data + 1, click: function() { $root.currentPageIndex($data) }, css: { selected: $data == $root.currentPageIndex() }\">\
+    //                        </a>\
+    //                    <!-- /ko -->\
+    //                </div>");
 
     // The "simpleGrid" binding
     ko.bindingHandlers.simpleGrid = {
@@ -75,16 +65,16 @@
                 ko.removeNode(element.firstChild);
 
             // Allow the default templates to be overridden
-            var gridTemplateName      = allBindings.simpleGridTemplate || "ko_simpleGrid_grid",
-                pageLinksTemplateName = allBindings.simpleGridPagerTemplate || "ko_simpleGrid_pageLinks";
+            var gridTemplateName      = allBindings.simpleGridTemplate || "ko_simpleGrid_grid"/*,
+                pageLinksTemplateName = allBindings.simpleGridPagerTemplate || "ko_simpleGrid_pageLinks"*/;
 
             // Render the main grid
             var gridContainer = element.appendChild(document.createElement("DIV"));
             ko.renderTemplate(gridTemplateName, viewModel, { templateEngine: templateEngine }, gridContainer, "replaceNode");
 
             // Render the page links
-            var pageLinksContainer = element.appendChild(document.createElement("DIV"));
-            ko.renderTemplate(pageLinksTemplateName, viewModel, { templateEngine: templateEngine }, pageLinksContainer, "replaceNode");
+            //var pageLinksContainer = element.appendChild(document.createElement("DIV"));
+            //ko.renderTemplate(pageLinksTemplateName, viewModel, { templateEngine: templateEngine }, pageLinksContainer, "replaceNode");
         }
     };
 })();

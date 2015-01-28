@@ -9,15 +9,15 @@ namespace Sciendo.Query.DataProviders
 {
     public class MockResultsProvider : ResultsProviderBase
     {
-        public override ResultsPackage GetResultsPackage(string query)
+        public override ResultsPackage GetResultsPackage(string query, int numRow, int startRow)
         {
             var dir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"App_data");
             var mockFilePath =
                     Path.Combine(dir,"examplequeryresult.json");
-            return Deserialize(mockFilePath);
+            return Deserialize(mockFilePath, numRow, startRow);
         }
 
-        private ResultsPackage Deserialize(string mockFilePath)
+        private ResultsPackage Deserialize(string mockFilePath,int numRows, int startRow)
         {
             using (var fs = File.OpenText(mockFilePath))
             {
@@ -27,18 +27,19 @@ namespace Sciendo.Query.DataProviders
                 return new ResultsPackage
                 {
                     ResultRows = ApplyHighlights(solrResponse),
-                    Fields = GetFields(solrResponse)
+                    Fields = GetFields(solrResponse),
+                    PageInfo=GetNewPageInfo(solrResponse,numRows,startRow)
                 };
             }
         }
 
 
-        public override ResultsPackage GetFilteredResultsPackage(string criteria, string facetFieldName, string facetFieldValue)
+        public override ResultsPackage GetFilteredResultsPackage(string criteria, int numRows, int startRow, string facetFieldName, string facetFieldValue)
         {
             var dir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_data");
             var mockFilePath =
                     Path.Combine(dir, "filteredjsonexample.json");
-            return Deserialize(mockFilePath);
+            return Deserialize(mockFilePath,numRows,startRow);
         }
     }
 }

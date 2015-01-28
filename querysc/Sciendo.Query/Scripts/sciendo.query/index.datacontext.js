@@ -2,7 +2,7 @@
 
     var self = this;
     self.filterByFacet = function (query, resultObservable, errorObservable, filterFieldName, selectedFacetObservable, facetFilteredObservable) {
-        return ajaxRequest("get", solrFilterUrl(query(),filterFieldName, selectedFacetObservable()))
+        return ajaxRequest("get", solrFilterUrl(query(),4,0,filterFieldName, selectedFacetObservable()))
             .done(getSucceeded)
             .fail(getFailed);
 
@@ -15,7 +15,8 @@
                     { headerText: "Artist", rowText: "artist" },
                     { headerText: "Title", rowText: "title" },
                     { headerText: "Lyrics", rowText: "lyrics" }
-                ], pageSize: 4
+                ],
+                pageSize: 4
             });
 
             resultObservable({ message: "Ok", fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel });
@@ -32,8 +33,8 @@
 
         }
     }
-    self.doSearch=function (query, resultObservable, errorObservable,facetFilteredObservable) {
-        return ajaxRequest("get", solrUrl(query()))
+    self.doSearch = function (query, resultObservable, errorObservable, facetFilteredObservable, pageInfoObservable) {
+        return ajaxRequest("get", solrUrl(query(),pageInfoObservable()))
             .done(getSucceeded)
             .fail(getFailed);
 
@@ -46,13 +47,15 @@
                     { headerText: "Artist", rowText: "artist" },
                     { headerText: "Title", rowText: "title" },
                     { headerText: "Lyrics", rowText: "lyrics" }
-                ], pageSize: 4
+                ]
             });
             resultObservable({ message: "Ok", fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel});
 
             errorObservable();
 
             facetFilteredObservable(false);
+
+            pageInfoObservable(data.PageInfo)
         }
 
         function getFailed() {
@@ -86,8 +89,11 @@
         return $.ajax(url, options);
     }
     // routes
-    function solrUrl(id) { return "/home/search?criteria=" + (id || ""); }
+    function solrUrl(id, pageInfo)
+    {
+        return "/home/search?criteria=" + (id || "") + "&numRows=" + (pageInfo.RowsPerPage || "4") + "&startRow=" + (pageInfo.PageStartRow || "0");
+    }
 
-    function solrFilterUrl(id, facetName, facetId) { return "/home/filter?criteria=" + (id || "") + "&facetFieldName=" + (facetName || "") + "&facetFieldValue=" + (facetId || ""); }
+    function solrFilterUrl(id, numRows, startRow, facetName, facetId) { return "/home/filter?criteria=" + (id || "") + "&numRows=" + (numRows || "4") + "&startRow=" + (startRow || "0") + "&facetFieldName=" + (facetName || "") + "&facetFieldValue=" + (facetId || ""); }
 
 };

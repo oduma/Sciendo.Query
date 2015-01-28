@@ -17,23 +17,23 @@ namespace Sciendo.Query.Controllers
         }
 
         [HttpGet]
-        public JsonResult Search(string criteria)
+        public JsonResult Search(string criteria, int numRows,int startRow)
         {
             return
                 Json(
                     ContainerConfig.Container.Resolve<IResultsProvider>(
                         ((QueryConfigurationSection) ConfigurationManager.GetSection("query")).CurrentDataProvider)
-                        .GetResultsPackage(criteria), JsonRequestBehavior.AllowGet);
+                        .GetResultsPackage(criteria,numRows,startRow), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public JsonResult Filter(string criteria, string facetFieldName, string facetFieldValue)
+        public JsonResult Filter(string criteria, int numRows, int startRow, string facetFieldName, string facetFieldValue)
         {
             return
                 Json(
                     ContainerConfig.Container.Resolve<IResultsProvider>(
                         ((QueryConfigurationSection)ConfigurationManager.GetSection("query")).CurrentDataProvider)
-                        .GetFilteredResultsPackage(criteria,facetFieldName, facetFieldValue), JsonRequestBehavior.AllowGet);
+                        .GetFilteredResultsPackage(criteria,numRows, startRow, facetFieldName, facetFieldValue), JsonRequestBehavior.AllowGet);
         }
         public ActionResult About()
         {

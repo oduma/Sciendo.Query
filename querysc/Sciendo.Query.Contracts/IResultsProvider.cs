@@ -4,9 +4,9 @@ namespace Sciendo.Query.Contracts
 {
     public interface IResultsProvider
     {
-        ResultsPackage GetResultsPackage(string query);
+        ResultsPackage GetResultsPackage(string query, int numRow, int startRow);
 
 
-        ResultsPackage GetFilteredResultsPackage(string criteria, string facetFieldName, string facetFieldValue);
+        ResultsPackage GetFilteredResultsPackage(string criteria, int numRow, int startRow, string facetFieldName, string facetFieldValue);
     }
 }

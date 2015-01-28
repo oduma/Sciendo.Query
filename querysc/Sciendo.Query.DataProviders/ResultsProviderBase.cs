@@ -11,7 +11,7 @@ namespace Sciendo.Query.DataProviders
 {
     public abstract class ResultsProviderBase:IResultsProvider
     {
-        public abstract ResultsPackage GetResultsPackage(string query);
+        public abstract ResultsPackage GetResultsPackage(string query, int numRow, int startRow);
 
         protected Field[] GetFields(SolrResponse solrResponse)
         {
@@ -65,8 +65,11 @@ namespace Sciendo.Query.DataProviders
                     }).ToArray();
         }
 
+        protected PageInfo GetNewPageInfo (SolrResponse response, int numRowsRequested, int startRow)
+        {
+            return new PageInfo { TotalRows = response.response.numFound, RowsPerPage = numRowsRequested, PageStartRow = startRow };
+        }
 
-
-        public abstract ResultsPackage GetFilteredResultsPackage(string criteria, string facetFieldName, string facetFieldValue);
+        public abstract ResultsPackage GetFilteredResultsPackage(string criteria, int numRow, int startRow, string facetFieldName, string facetFieldValue);
     }
 }
