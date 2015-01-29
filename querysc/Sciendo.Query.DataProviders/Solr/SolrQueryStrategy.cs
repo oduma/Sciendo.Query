@@ -45,7 +45,7 @@ namespace Sciendo.Query.DataProviders.Solr
                 + string.Join("+",_outputFields.Keys) 
                 + "&qf=" + string.Join("+", _outputFields.Where(o=>o.Value.Boost.HasValue).Select(o=>o.Key+"^"+o.Value.Boost))
                 + "&hl=true&hl.simple.pre=<em>&hl.simple.post=<%2Fem>&hl.requireFieldMatch=false&hl.highlightMultiTerm=true&hl.fl=" + string.Join("+",_outputFields.Where(o=>o.Value.Highlight).Select(o=>o.Key))
-                + "&facet=true&facet.mincount=1&facet.missing=true&facet.field=" + string.Join("&facet.field=", _facetFields);
+                + "&facet=true&facet.mincount=1&facet.limit=-1&facet.missing=true&facet.field=" + string.Join("&facet.field=", _facetFields);
         }
 
         public string GetFilterString()

@@ -10,7 +10,7 @@ namespace Sciendo.Query.DataProviders.Tests
         public void Deseralizing_Ok()
         {
             var resultsProvider = new MockResultsProvider();
-            var result = resultsProvider.GetResultsPackage("some query");
+            var result = resultsProvider.GetResultsPackage("some query",20,26);
             Assert.IsNotNull(result);
             Assert.True(result.ResultRows[0].lyrics.Contains("<em>"));
             Assert.AreEqual(3, result.Fields.Length);
@@ -23,7 +23,7 @@ namespace Sciendo.Query.DataProviders.Tests
         public void Deseralizing_Filter_Ok()
         {
             var resultsProvider = new MockResultsProvider();
-            var result = resultsProvider.GetFilteredResultsPackage("some query","some field","some value");
+            var result = resultsProvider.GetFilteredResultsPackage("some query",20,25,"some field","some value");
             Assert.IsNotNull(result);
             Assert.True(result.ResultRows[0].title.Contains("<em>"));
             Assert.AreEqual(3, result.Fields.Length);
