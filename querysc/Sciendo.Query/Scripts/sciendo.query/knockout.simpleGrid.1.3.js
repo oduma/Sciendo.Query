@@ -42,15 +42,6 @@
                             </tr>\
                         </tbody>\
                     </table>");
-    //templateEngine.addTemplate("ko_simpleGrid_pageLinks", "\
-    //                <div class=\"ko-grid-pageLinks\">\
-    //                    <span>Page:</span>\
-    //                    <!-- ko foreach: ko.utils.range(0, maxPageIndex) -->\
-    //                           <a href=\"#\" data-bind=\"text: $data + 1, click: function() { $root.currentPageIndex($data) }, css: { selected: $data == $root.currentPageIndex() }\">\
-    //                        </a>\
-    //                    <!-- /ko -->\
-    //                </div>");
-
     // The "simpleGrid" binding
     ko.bindingHandlers.simpleGrid = {
         init: function() {
@@ -65,16 +56,11 @@
                 ko.removeNode(element.firstChild);
 
             // Allow the default templates to be overridden
-            var gridTemplateName      = allBindings.simpleGridTemplate || "ko_simpleGrid_grid"/*,
-                pageLinksTemplateName = allBindings.simpleGridPagerTemplate || "ko_simpleGrid_pageLinks"*/;
+            var gridTemplateName      = allBindings.simpleGridTemplate || "ko_simpleGrid_grid";
 
             // Render the main grid
             var gridContainer = element.appendChild(document.createElement("DIV"));
             ko.renderTemplate(gridTemplateName, viewModel, { templateEngine: templateEngine }, gridContainer, "replaceNode");
-
-            // Render the page links
-            //var pageLinksContainer = element.appendChild(document.createElement("DIV"));
-            //ko.renderTemplate(pageLinksTemplateName, viewModel, { templateEngine: templateEngine }, pageLinksContainer, "replaceNode");
         }
     };
 })();

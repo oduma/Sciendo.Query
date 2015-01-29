@@ -1,8 +1,8 @@
 ﻿function datacontext() {
 
     var self = this;
-    self.filterByFacet = function (query, resultObservable, errorObservable, filterFieldName, selectedFacetObservable, facetFilteredObservable) {
-        return ajaxRequest("get", solrFilterUrl(query(),4,0,filterFieldName, selectedFacetObservable()))
+    self.filterByFacet = function (query, resultObservable, errorObservable, filterFieldNameObservable, selectedFacetObservable, facetFilteredObservable,pageInfoObservable) {
+        return ajaxRequest("get", solrFilterUrl(query(),pageInfoObservable(),filterFieldNameObservable(), selectedFacetObservable()))
             .done(getSucceeded)
             .fail(getFailed);
 
@@ -15,8 +15,7 @@
                     { headerText: "Artist", rowText: "artist" },
                     { headerText: "Title", rowText: "title" },
                     { headerText: "Lyrics", rowText: "lyrics" }
-                ],
-                pageSize: 4
+                ]
             });
 
             resultObservable({ message: "Ok", fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel });
@@ -24,6 +23,9 @@
             errorObservable();
 
             facetFilteredObservable(true);
+
+            pageInfoObservable(data.PageInfo)
+
 
         }
         function getFailed() {
@@ -94,6 +96,6 @@
         return "/home/search?criteria=" + (id || "") + "&numRows=" + (pageInfo.RowsPerPage || "4") + "&startRow=" + (pageInfo.PageStartRow || "0");
     }
 
-    function solrFilterUrl(id, numRows, startRow, facetName, facetId) { return "/home/filter?criteria=" + (id || "") + "&numRows=" + (numRows || "4") + "&startRow=" + (startRow || "0") + "&facetFieldName=" + (facetName || "") + "&facetFieldValue=" + (facetId || ""); }
+    function solrFilterUrl(id, pageInfo, facetName, facetId) { return "/home/filter?criteria=" + (id || "") + "&numRows=" + (pageInfo.RowsPerPage || "4") + "&startRow=" + (pageInfo.PageStartRow || "0") + "&facetFieldName=" + (facetName || "") + "&facetFieldValue=" + (facetId || ""); }
 
 };

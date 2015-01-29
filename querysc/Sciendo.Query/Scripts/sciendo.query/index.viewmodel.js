@@ -5,6 +5,7 @@
     self.error = ko.observable(),
     self.selectedFacetValue = ko.observable(),
     self.facetFiltered = ko.observable(false),
+    self.selectedFacetFieldName = ko.observable(),
     self.pageInfo = ko.observable({ TotalRows: 0, RowsPerPage: 4, PageStartRow: 0 }),
     self.notMaxPage = ko.computed(function () {
         return (self.pageInfo().PageStartRow + self.pageInfo().RowsPerPage)<self.pageInfo().TotalRows;
@@ -21,22 +22,31 @@
     }
     self.getNextPage = function () {
         self.pageInfo().PageStartRow += self.pageInfo().RowsPerPage;
-        (new datacontext()).doSearch(self.criteria, self.resultData, self.error, self.facetFiltered, self.pageInfo);
+        if (self.facetFiltered())
+            (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, self.selectedFacetFieldName, self.selectedFacetValue, self.facetFiltered, self.pageInfo);
+        else
+            (new datacontext()).doSearch(self.criteria, self.resultData, self.error, self.facetFiltered, self.pageInfo);
     }
     self.getPreviousPage = function () {
         self.pageInfo().PageStartRow -= self.pageInfo().RowsPerPage;
-        (new datacontext()).doSearch(self.criteria, self.resultData, self.error, self.facetFiltered, self.pageInfo);
+        if (self.facetFiltered())
+            (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, self.selectedFacetFieldName, self.selectedFacetValue, self.facetFiltered, self.pageInfo);
+        else 
+            (new datacontext()).doSearch(self.criteria, self.resultData, self.error, self.facetFiltered, self.pageInfo);
     }
 
     self.artistFacetSelected=function()
     {
-        (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, "artist_f", self.selectedFacetValue,self.facetFiltered);
+        self.selectedFacetFieldName("artist_f");
+        (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, self.selectedFacetFieldName, self.selectedFacetValue,self.facetFiltered, self.pageInfo);
     }
     self.extensionFacetSelected = function () {
-        (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, "extension_f", self.selectedFacetValue, self.facetFiltered);
+        self.selectedFacetFieldName("extension_f");
+        (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, self.selectedFacetFieldName, self.selectedFacetValue, self.facetFiltered, self.pageInfo);
     }
     self.letterFacetSelected = function () {
-        (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, "letter_f", self.selectedFacetValue, self.facetFiltered);
+        self.selectedFacetFieldName("letter_f");
+        (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, self.selectedFacetFieldName, self.selectedFacetValue, self.facetFiltered, self.pageInfo);
     }
 }
 
