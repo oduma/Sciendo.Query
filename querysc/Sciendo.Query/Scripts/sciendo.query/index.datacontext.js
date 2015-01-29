@@ -18,9 +18,9 @@
                 ]
             });
 
-            resultObservable({ message: "Ok", fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel });
+            resultObservable({fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel });
 
-            errorObservable();
+            errorObservable("");
 
             facetFilteredObservable(true);
 
@@ -30,7 +30,7 @@
         }
         function getFailed() {
             errorObservable("Error retrieving results.");
-            resultObservable({ message: "Not Ok"});
+            resultObservable();
             facetFilteredObservable(false);
 
         }
@@ -51,9 +51,9 @@
                     { headerText: "Lyrics", rowText: "lyrics" }
                 ]
             });
-            resultObservable({ message: "Ok", fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel});
+            resultObservable({fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel});
 
-            errorObservable();
+            errorObservable("");
 
             facetFilteredObservable(false);
 
@@ -62,7 +62,7 @@
 
         function getFailed() {
             errorObservable("Error retrieving results.");
-            resultObservable({ message: "Not Ok" });
+            resultObservable();
             facetFilteredObservable(false);
 
         }
@@ -96,6 +96,8 @@
         return "/home/search?criteria=" + (id || "") + "&numRows=" + (pageInfo.RowsPerPage || "4") + "&startRow=" + (pageInfo.PageStartRow || "0");
     }
 
-    function solrFilterUrl(id, pageInfo, facetName, facetId) { return "/home/filter?criteria=" + (id || "") + "&numRows=" + (pageInfo.RowsPerPage || "4") + "&startRow=" + (pageInfo.PageStartRow || "0") + "&facetFieldName=" + (facetName || "") + "&facetFieldValue=" + (facetId || ""); }
+    function solrFilterUrl(id, pageInfo, facetName, facetId) {
+        return "/home/filter?criteria=" + (id || "") + "&numRows=" + (pageInfo.RowsPerPage || "4") + "&startRow=" + (pageInfo.PageStartRow || "0") + "&facetFieldName=" + (facetName || "") + "&facetFieldValue=" + (facetId || "");
+    }
 
 };

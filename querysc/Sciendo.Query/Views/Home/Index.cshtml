@@ -7,13 +7,13 @@
     <input class="required" data-bind="value: criteria, selected: true, blurOnEnter: true" />
     <button data-bind="click: getResults">Go</button>
 }
-<h3>Results</h3>
 <p class="error" data-bind="text: error"></p>
 <div data-bind="with: resultData">
-    <p data-bind="text: message"></p>
+    <h3>Results</h3>
     <a href="#" data-bind="text: 'Previous ' + $root.pageInfo().RowsPerPage, visible:$root.pageInfo().PageStartRow, click:$root.getPreviousPage"></a>
     <p style="display:inline;" data-bind="text: 'Showing items ' +$root.pageInfo().PageStartRow + ' to ' + $root.pageLastIndex() +' of ' + $root.pageInfo().TotalRows"></p>
     <a href="#" data-bind="text: 'Next ' + $root.pageInfo().RowsPerPage, visible:$root.notMaxPage, click:$root.getNextPage"></a>
+        <br/>
         <input style="display:block" type= "button" value="Show All" data-bind="visible:$root.facetFiltered, click: $root.getResults"/>
         <div class="all-facets" data-bind="if:$root.hasFacets()">
         <div class="facet-titles-row">
