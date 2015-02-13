@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPlayerProcess.cs" />
     <Compile Include="IResultsProvider.cs" />
     <Compile Include="Model\Doc.cs" />
     <Compile Include="Model\Field.cs" />

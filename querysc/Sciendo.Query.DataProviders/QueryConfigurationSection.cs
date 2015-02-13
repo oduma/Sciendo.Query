@@ -21,6 +21,19 @@ namespace Sciendo.Query.DataProviders
             }
         }
 
+        [ConfigurationProperty("currentPlayerProcess", DefaultValue = "mockProcess", IsRequired = true)]
+        public string CurrentPlayerProcess
+        {
+            get
+            {
+                return (string)this["currentPlayerProcess"];
+            }
+            set
+            {
+                this["currentPlayerProcess"] = value;
+            }
+        }
+
         [ConfigurationProperty("solrConnectionString", DefaultValue = "", IsRequired = false)]
         public string SolrConnectionString
         {

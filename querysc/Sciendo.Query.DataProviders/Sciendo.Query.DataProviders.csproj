@@ -47,7 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClementinePlayerProcess.cs" />
     <Compile Include="DictionariesConverter.cs" />
+    <Compile Include="MockPlayerProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MockResultsProvider.cs" />
     <Compile Include="QueryConfigurationSection.cs" />

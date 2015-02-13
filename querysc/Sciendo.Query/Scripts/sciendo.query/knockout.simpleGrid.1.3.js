@@ -19,6 +19,13 @@
             // If you don't specify columns configuration, we'll use scaffolding
             this.columns = configuration.columns || getColumnsForScaffolding(ko.utils.unwrapObservable(this.data));
 
+            this.keyColumn = configuration.keyColumn;
+
+            queue= function(itemId)
+            {
+                alert("clicked " +itemId+ "!");
+            }
+
         }
     };
 
@@ -33,12 +40,21 @@
                     <table class=\"ko-grid\" cellspacing=\"0\">\
                         <thead>\
                             <tr data-bind=\"foreach: columns\">\
-                               <th data-bind=\"text: headerText\"></th>\
+                                <!-- ko ifnot:$root.keyColumn==rowText-->\
+                                    <th data-bind=\"text: headerText\"></th>\
+                                <!-- /ko -->\
                             </tr>\
                         </thead>\
                         <tbody data-bind=\"foreach: data\">\
                            <tr data-bind=\"foreach: $parent.columns\">\
-                               <td data-bind=\"html: typeof rowText == 'function' ? rowText($parent) : $parent[rowText] \"></td>\
+                                <!-- ko ifnot:$root.keyColumn==rowText-->\
+                                    <!-- ko if:rowText==\"title\"-->\
+                                        <td><a data-bind=\"attr:{href: '/home/addsongtoqueue?filePath='+$parent['file_path'] }, html: typeof rowText == 'function' ? rowText($parent) : $parent[rowText]\"/></td>\
+                                    <!-- /ko -->\
+                                    <!-- ko if:rowText!=\"title\"-->\
+                                        <td data-bind=\"html: typeof rowText == 'function' ? rowText($parent) : $parent[rowText] \"></td>\
+                                    <!-- /ko -->\
+                                <!-- /ko -->\
                             </tr>\
                         </tbody>\
                     </table>");

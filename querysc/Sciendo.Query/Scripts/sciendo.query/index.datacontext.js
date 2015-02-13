@@ -7,26 +7,7 @@
             .fail(getFailed);
 
         function getSucceeded(data) {
-            var grdModel = new ko.simpleGrid.viewModel({
-                data: data.ResultRows,
-                columns: [
-                    { headerText: "File Path", rowText: "file_path" },
-                    { headerText: "Album", rowText: "album" },
-                    { headerText: "Artist", rowText: "artist" },
-                    { headerText: "Title", rowText: "title" },
-                    { headerText: "Lyrics", rowText: "lyrics" }
-                ]
-            });
-
-            resultObservable({fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel });
-
-            errorObservable("");
-
-            facetFilteredObservable(true);
-
-            pageInfoObservable(data.PageInfo)
-
-
+            displayResults(data, resultObservable, errorObservable, facetFilteredObservable, pageInfoObservable, true);
         }
         function getFailed() {
             errorObservable("Error retrieving results.");
@@ -41,23 +22,7 @@
             .fail(getFailed);
 
         function getSucceeded(data) {
-            var grdModel = new ko.simpleGrid.viewModel({
-                data: data.ResultRows,
-                columns: [
-                    { headerText: "File Path", rowText: "file_path" },
-                    { headerText: "Album", rowText: "album" },
-                    { headerText: "Artist", rowText: "artist" },
-                    { headerText: "Title", rowText: "title" },
-                    { headerText: "Lyrics", rowText: "lyrics" }
-                ]
-            });
-            resultObservable({fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel});
-
-            errorObservable("");
-
-            facetFilteredObservable(false);
-
-            pageInfoObservable(data.PageInfo)
+            displayResults(data, resultObservable, errorObservable, facetFilteredObservable, pageInfoObservable,false);
         }
 
         function getFailed() {
@@ -66,6 +31,29 @@
             facetFilteredObservable(false);
 
         }
+    }
+
+    function displayResults(data,resultObservable, errorObservable, facetFilteredObservable, pageInfoObservable, filtered)
+    {
+        var grdModel = new ko.simpleGrid.viewModel({
+            data: data.ResultRows,
+            keyColumn:"file_path",
+            columns: [
+                { headerText: "Add to playlist", rowText: "file_path" },
+                { headerText: "Album", rowText: "album" },
+                { headerText: "Artist", rowText: "artist" },
+                { headerText: "Title", rowText: "title" },
+                { headerText: "Lyrics", rowText: "lyrics" }
+            ]
+        });
+        resultObservable({ fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel });
+
+        errorObservable("");
+
+        facetFilteredObservable(filtered);
+
+        pageInfoObservable(data.PageInfo)
+
     }
     function createResultRow(data) {
         return new datacontext.resultRow(data); // todoItem is injected by todo.model.js

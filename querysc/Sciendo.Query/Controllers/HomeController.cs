@@ -35,6 +35,17 @@ namespace Sciendo.Query.Controllers
                         ((QueryConfigurationSection)ConfigurationManager.GetSection("query")).CurrentDataProvider)
                         .GetFilteredResultsPackage(criteria,numRows, startRow, facetFieldName, facetFieldValue), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public JsonResult AddSongToQueue(string filePath)
+        {
+            return
+                Json(
+                    ContainerConfig.Container.Resolve<IPlayerProcess>(
+                        ((QueryConfigurationSection)ConfigurationManager.GetSection("query")).CurrentPlayerProcess)
+                        .AddSongToQueue(filePath), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Search tool for music collection";
