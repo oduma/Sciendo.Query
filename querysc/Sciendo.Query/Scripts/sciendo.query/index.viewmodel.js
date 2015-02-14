@@ -6,7 +6,7 @@
     self.selectedFacetValue = ko.observable(),
     self.facetFiltered = ko.observable(false),
     self.selectedFacetFieldName = ko.observable(),
-    self.pageInfo = ko.observable({ TotalRows: 0, RowsPerPage: 4, PageStartRow: 0 }),
+    self.pageInfo = ko.observable({ TotalRows: 0, RowsPerPage: 0, PageStartRow: 0 }),
     self.notMaxPage = ko.computed(function () {
         return (self.pageInfo().PageStartRow + self.pageInfo().RowsPerPage)<self.pageInfo().TotalRows;
     }, self);
@@ -38,17 +38,17 @@
     self.artistFacetSelected=function()
     {
         self.selectedFacetFieldName("artist_f");
-        self.pageInfo({ TotalRows: 0, RowsPerPage: 4, PageStartRow: 0 });
+        self.pageInfo({ TotalRows: 0, RowsPerPage: 0, PageStartRow: 0 });
         (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, self.selectedFacetFieldName, self.selectedFacetValue,self.facetFiltered, self.pageInfo);
     }
     self.extensionFacetSelected = function () {
         self.selectedFacetFieldName("extension_f");
-        self.pageInfo({ TotalRows: 0, RowsPerPage: 4, PageStartRow: 0 });
+        self.pageInfo({ TotalRows: 0, RowsPerPage: 0, PageStartRow: 0 });
         (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, self.selectedFacetFieldName, self.selectedFacetValue, self.facetFiltered, self.pageInfo);
     }
     self.letterFacetSelected = function () {
         self.selectedFacetFieldName("letter_f");
-        self.pageInfo({ TotalRows: 0, RowsPerPage: 4, PageStartRow: 0 });
+        self.pageInfo({ TotalRows: 0, RowsPerPage: 0, PageStartRow: 0 });
         (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, self.selectedFacetFieldName, self.selectedFacetValue, self.facetFiltered, self.pageInfo);
     }
 }

@@ -9,6 +9,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.Ajax.Utilities;
 using Sciendo.IOC;
+using Sciendo.Query.DataProviders;
+using System.Configuration;
 
 namespace Sciendo.Query
 {
@@ -26,13 +28,13 @@ namespace Sciendo.Query
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            IocConfig.RegisterComponents(ContainerConfig.Container);
+            IocConfig.RegisterComponents(SciendoConfiguration.Container);
             
 
         }
     }
 
-    public class ContainerConfig
+    public static class SciendoConfiguration
     {
 
         public static Container Container
@@ -42,6 +44,16 @@ namespace Sciendo.Query
                 if(!HttpContext.Current.Application.AllKeys.Contains("ioc"))
                     HttpContext.Current.Application.Add("ioc",Container.GetInstance());
                 return HttpContext.Current.Application["ioc"] as Container;
+            }
+        }
+
+        public static QueryConfigurationSection QueryConfiguration
+        {
+            get
+            {
+                if (!HttpContext.Current.Application.AllKeys.Contains("query"))
+                    HttpContext.Current.Application.Add("query", ConfigurationManager.GetSection("query"));
+                return HttpContext.Current.Application["query"] as QueryConfigurationSection;
             }
         }
     }

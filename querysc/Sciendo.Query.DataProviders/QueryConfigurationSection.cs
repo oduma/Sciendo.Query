@@ -34,6 +34,18 @@ namespace Sciendo.Query.DataProviders
             }
         }
 
+        [ConfigurationProperty("playerProcessIdentifier", DefaultValue = "", IsRequired = false)]
+        public string PlayerProcessIdentifier
+        {
+            get
+            {
+                return (string)this["playerProcessIdentifier"];
+            }
+            set
+            {
+                this["playerProcessIdentifier"] = value;
+            }
+        }
         [ConfigurationProperty("solrConnectionString", DefaultValue = "", IsRequired = false)]
         public string SolrConnectionString
         {
@@ -44,6 +56,18 @@ namespace Sciendo.Query.DataProviders
             set
             {
                 this["solrConnectionString"] = value;
+            }
+        }
+        [ConfigurationProperty("pageSize", DefaultValue = 25, IsRequired = false)]
+        public int PageSize
+        {
+            get
+            {
+                return (int)this["pageSize"];
+            }
+            set
+            {
+                this["pageSize"] = value;
             }
         }
 

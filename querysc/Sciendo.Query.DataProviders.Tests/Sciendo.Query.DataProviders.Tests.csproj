@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeserializingSolrResponseTests.cs" />
+    <Compile Include="ProcessAFileTests.cs" />
     <Compile Include="SolrQueryStrategyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -33,19 +33,30 @@
         }
     }
 
+    self.addToQueue = function (filePath) {
+        return ajaxRequest("get", playerUrl(filePath))
+        .done(getSucceeded)
+        .fail(getFailed);
+
+        function getSucceeded(data) {
+        }
+        function getFailed() {
+        }
+    }
+
     function displayResults(data,resultObservable, errorObservable, facetFilteredObservable, pageInfoObservable, filtered)
     {
         var grdModel = new ko.simpleGrid.viewModel({
             data: data.ResultRows,
-            keyColumn:"file_path",
+            keyColumn: "file_path",
             columns: [
-                { headerText: "Add to playlist", rowText: "file_path" },
-                { headerText: "Album", rowText: "album" },
-                { headerText: "Artist", rowText: "artist" },
-                { headerText: "Title", rowText: "title" },
-                { headerText: "Lyrics", rowText: "lyrics" }
+                { headerText: "Add to playlist", rowText: "file_path", isKey:true, isLink:false, colWidth:"0px"},
+                { headerText: "Album", rowText: "album", isKey: false, isLink: false, colWidth: "300px" },
+                { headerText: "Artist", rowText: "artist", isKey: false, isLink: false, colWidth: "100px" },
+                { headerText: "Title", rowText: "title", isKey: false, isLink: true, colWidth: "300px" },
+                { headerText: "Lyrics", rowText: "lyrics", isKey: false, isLink: false, colWidth: "500px" }
             ]
-        });
+        },self);
         resultObservable({ fields: data.Fields, resultRows: data.ResultRows, gridViewModel: grdModel });
 
         errorObservable("");
@@ -81,11 +92,15 @@
     // routes
     function solrUrl(id, pageInfo)
     {
-        return "/home/search?criteria=" + (id || "") + "&numRows=" + (pageInfo.RowsPerPage || "4") + "&startRow=" + (pageInfo.PageStartRow || "0");
+        return "/home/search?criteria=" + (id || "") + "&numRows=" + (pageInfo.RowsPerPage || "0") + "&startRow=" + (pageInfo.PageStartRow || "0");
     }
 
     function solrFilterUrl(id, pageInfo, facetName, facetId) {
         return "/home/filter?criteria=" + (id || "") + "&numRows=" + (pageInfo.RowsPerPage || "4") + "&startRow=" + (pageInfo.PageStartRow || "0") + "&facetFieldName=" + (facetName || "") + "&facetFieldValue=" + (facetId || "");
     }
 
+    function playerUrl(filePath)
+    {
+        return "/home/addsongtoqueue?filePath=" + (filePath || "");
+    }
 };

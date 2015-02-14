@@ -13,7 +13,7 @@
 
     ko.simpleGrid = {
         // Defines a view model class you can use to populate a grid
-        viewModel: function (configuration) {
+        viewModel: function (configuration, dataContextInstance) {
             this.data = configuration.data;
 
             // If you don't specify columns configuration, we'll use scaffolding
@@ -21,9 +21,11 @@
 
             this.keyColumn = configuration.keyColumn;
 
-            queue= function(itemId)
+            this.linkColumn = configuration.linkColumn;
+
+            queue= function(itemId,e)
             {
-                alert("clicked " +itemId+ "!");
+                dataContextInstance.addToQueue((e.srcElement.id != "")?e.srcElement.id:e.srcElement.parentElement.id);
             }
 
         }
@@ -37,21 +39,22 @@
     };
 
     templateEngine.addTemplate("ko_simpleGrid_grid", "\
-                    <table class=\"ko-grid\" cellspacing=\"0\">\
-                        <thead>\
+                    <table class=\"ko-grid\" cellspacing=\"10px\">\
+                        <thead class=\"ko-grid-header\">\
                             <tr data-bind=\"foreach: columns\">\
-                                <!-- ko ifnot:$root.keyColumn==rowText-->\
-                                    <th data-bind=\"text: headerText\"></th>\
+                                <!-- ko ifnot:isKey-->\
+                                    <th  class=\"ko-grid-header\" data-bind=\"style:{width: colWidth}, text: headerText\"></th>\
                                 <!-- /ko -->\
                             </tr>\
                         </thead>\
                         <tbody data-bind=\"foreach: data\">\
                            <tr data-bind=\"foreach: $parent.columns\">\
                                 <!-- ko ifnot:$root.keyColumn==rowText-->\
-                                    <!-- ko if:rowText==\"title\"-->\
-                                        <td><a data-bind=\"attr:{href: '/home/addsongtoqueue?filePath='+$parent['file_path'] }, html: typeof rowText == 'function' ? rowText($parent) : $parent[rowText]\"/></td>\
+                                    <!-- ko if:isLink-->\
+                                        <td>\
+                                        <a data-bind=\"click:queue, attr:{'id': $parent[$root.keyColumn] }, html: typeof rowText == 'function' ? rowText($parent) : $parent[rowText]\"/></td>\
                                     <!-- /ko -->\
-                                    <!-- ko if:rowText!=\"title\"-->\
+                                    <!-- ko ifnot:isLink-->\
                                         <td data-bind=\"html: typeof rowText == 'function' ? rowText($parent) : $parent[rowText] \"></td>\
                                     <!-- /ko -->\
                                 <!-- /ko -->\

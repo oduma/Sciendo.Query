@@ -9,9 +9,10 @@ namespace Sciendo.Query.DataProviders
 {
     public class MockPlayerProcess:IPlayerProcess
     {
-        public bool AddSongToQueue(string filePath)
+        public bool AddSongToQueue(string filePath, string withProcess)
         {
-            throw new NotImplementedException();
+
+            return true;
         }
     }
 }

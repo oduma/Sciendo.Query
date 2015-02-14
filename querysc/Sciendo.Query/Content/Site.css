@@ -374,6 +374,14 @@ aside {
        
     }
 
+.ko-grid{
+    border:solid 1px; border-color:navy; border-spacing:10px 10px 10px 10px!important;
+}
+
+.ko-grid-header{
+    padding:0.85em;
+    background-color:#cccccc;
+}
 /* login page */
 #loginForm {
     border-right: solid 2px #c8c8c8;
