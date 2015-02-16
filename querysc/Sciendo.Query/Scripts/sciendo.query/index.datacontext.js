@@ -66,6 +66,7 @@
         pageInfoObservable(data.PageInfo)
 
     }
+
     function createResultRow(data) {
         return new datacontext.resultRow(data); // todoItem is injected by todo.model.js
     }
