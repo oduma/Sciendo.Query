@@ -47,7 +47,7 @@
         (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, self.selectedFacetFieldName, self.selectedFacetValue, self.facetFiltered, self.pageInfo);
     }
     self.letterFacetSelected = function () {
-        self.selectedFacetFieldName("letter_f");
+        self.selectedFacetFieldName("letter_catalog_f");
         self.pageInfo({ TotalRows: 0, RowsPerPage: 0, PageStartRow: 0 });
         (new datacontext()).filterByFacet(self.criteria, self.resultData, self.error, self.selectedFacetFieldName, self.selectedFacetValue, self.facetFiltered, self.pageInfo);
     }

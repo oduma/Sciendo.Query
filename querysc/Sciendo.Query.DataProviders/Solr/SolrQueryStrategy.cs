@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Web;
 
 namespace Sciendo.Query.DataProviders.Solr
 {
@@ -40,10 +42,10 @@ namespace Sciendo.Query.DataProviders.Solr
         {
             if (string.IsNullOrEmpty(_query))
                 return null;
-            return "q="+_query +"&rows="+_numRows +"&start="+_startRow
+            return "q="+WebUtility.UrlEncode("\"" +_query+"\"") +"&rows="+WebUtility.UrlEncode(_numRows.ToString()) +"&start="+WebUtility.UrlEncode(_startRow.ToString())
                 +"&wt=json&indent=true&stopwords=true&lowercaseOperators=true&defType=edismax&fl=" 
-                + string.Join("+",_outputFields.Keys) 
-                + "&qf=" + string.Join("+", _outputFields.Where(o=>o.Value.Boost.HasValue).Select(o=>o.Key+"^"+o.Value.Boost))
+                + WebUtility.UrlEncode(string.Join(" ",_outputFields.Keys)) 
+                + "&qf=" + WebUtility.UrlEncode(string.Join(" ", _outputFields.Where(o=>o.Value.Boost.HasValue).Select(o=>o.Key+"^"+o.Value.Boost)))
                 + "&hl=true&hl.simple.pre=<em>&hl.simple.post=<%2Fem>&hl.requireFieldMatch=false&hl.highlightMultiTerm=true&hl.fl=" + string.Join("+",_outputFields.Where(o=>o.Value.Highlight).Select(o=>o.Key))
                 + "&facet=true&facet.mincount=1&facet.limit=-1&facet.missing=true&facet.field=" + string.Join("&facet.field=", _facetFields);
         }
@@ -54,7 +56,7 @@ namespace Sciendo.Query.DataProviders.Solr
             if (string.IsNullOrEmpty(temp))
                 return temp;
             if (!string.IsNullOrEmpty(_filterField)&&!string.IsNullOrEmpty(_filterValue))
-                temp="fq="+_filterField+":\""+_filterValue+"\"&"+temp;
+                temp="fq="+WebUtility.UrlEncode(_filterField+":\""+_filterValue+"\"")+"&"+temp;
             return temp;
         }
 
