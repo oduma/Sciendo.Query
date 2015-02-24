@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Sciendo.Query.Contracts;
 using Sciendo.Query.Contracts.Model;
-using Sciendo.Query.DataProviders.Solr;
 
-namespace Sciendo.Query.DataProviders
+namespace Sciendo.Query.DataProviders.Solr
 {
     public abstract class ResultsProviderBase:IResultsProvider
     {

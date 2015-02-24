@@ -1,17 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sciendo.Query", "Sciendo.Query\Sciendo.Query.csproj", "{7BB0369F-8421-4CFF-B675-58BB6A826D4A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sciendo.Query.Contracts", "Sciendo.Query.Contracts\Sciendo.Query.Contracts.csproj", "{028414F6-E130-4538-87E4-6A2C1B632CD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sciendo.IOC", "Sciendo.IOC\Sciendo.IOC.csproj", "{A88B9C50-7737-4C4C-ABE0-9AA2F4C35F2C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sciendo.Query.DataProviders", "Sciendo.Query.DataProviders\Sciendo.Query.DataProviders.csproj", "{3D2F60C2-7BD8-40CD-85D3-317756D53C64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sciendo.Query.DataProviders.Tests", "Sciendo.Query.DataProviders.Tests\Sciendo.Query.DataProviders.Tests.csproj", "{733AC688-B611-4F2B-B80C-BE6AC5B6E43C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3rdParty", "3rdParty", "{3EDB17E3-8D19-4EAB-93DD-99C948118940}"
+	ProjectSection(SolutionItems) = preProject
+		3rdParty\Sciendo.IOC.dll = 3rdParty\Sciendo.IOC.dll
+		3rdParty\Sciendo.IOC.pdb = 3rdParty\Sciendo.IOC.pdb
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7F6A0703-B280-4AFB-822B-4B3E617A6895}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +36,6 @@ Global
 		{028414F6-E130-4538-87E4-6A2C1B632CD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{028414F6-E130-4538-87E4-6A2C1B632CD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{028414F6-E130-4538-87E4-6A2C1B632CD2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A88B9C50-7737-4C4C-ABE0-9AA2F4C35F2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A88B9C50-7737-4C4C-ABE0-9AA2F4C35F2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A88B9C50-7737-4C4C-ABE0-9AA2F4C35F2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A88B9C50-7737-4C4C-ABE0-9AA2F4C35F2C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3D2F60C2-7BD8-40CD-85D3-317756D53C64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3D2F60C2-7BD8-40CD-85D3-317756D53C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D2F60C2-7BD8-40CD-85D3-317756D53C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
