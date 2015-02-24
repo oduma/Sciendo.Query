@@ -1,11 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Sciendo.Query.Contracts.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Sciendo.Query.DataProviders.Solr;
 
 namespace Sciendo.Query.DataProviders
@@ -32,7 +28,7 @@ namespace Sciendo.Query.DataProviders
             {
                 var item = JObject.Load(reader);
 
-                Dictionary<string, int> facetField = new Dictionary<string, int>();
+                var facetField = new Dictionary<string, int>();
                 foreach (var itemProperty in item.Properties())
                 {
                     string key = (itemProperty.Name) ?? "Unknown";
@@ -51,7 +47,7 @@ namespace Sciendo.Query.DataProviders
         private static object ReadHighlighting(JsonReader reader)
         {
             var item = JObject.Load(reader);
-            Dictionary<string, Highlighting> highlightings = new Dictionary<string, Highlighting>();
+            var highlightings = new Dictionary<string, Highlighting>();
             foreach (var itemProperty in item.Properties())
             {
                 var highlighting = JsonConvert.DeserializeObject<Highlighting>(itemProperty.Value.ToString());

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Sciendo.Query.DataProviders.Solr
 {
@@ -20,7 +18,7 @@ namespace Sciendo.Query.DataProviders.Solr
             _filterValue=filterValue;
         }
 
-        private Dictionary<string, FieldProperty> _outputFields = new Dictionary<string, FieldProperty> { 
+        private readonly Dictionary<string, FieldProperty> _outputFields = new Dictionary<string, FieldProperty> { 
         { "lyrics", new FieldProperty { Boost = 10, Highlight = true } }, 
         { "title", new FieldProperty { Boost = 5, Highlight = true } }, 
         { "album", new FieldProperty { Boost = 3, Highlight = true } }, 
@@ -28,7 +26,7 @@ namespace Sciendo.Query.DataProviders.Solr
         { "file_path", new FieldProperty { Boost = 1, Highlight = false }},
         { "file_path_id", new FieldProperty{IsId=true}}};
 
-        private string[] _facetFields = new[] { "artist_f", "extension_f", "letter_catalog_f" };
+        private readonly string[] _facetFields = { "artist_f", "extension_f", "letter_catalog_f" };
         private readonly string _query;
         private readonly string _filterField;
         private readonly string _filterValue;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Sciendo.Query.DataProviders.Solr
+﻿namespace Sciendo.Query.DataProviders.Solr
 {
     public class FieldProperty
     {

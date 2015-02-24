@@ -1,10 +1,9 @@
-﻿@using System.Web.Script.Services
-@{
+﻿@{
     ViewBag.Title = "Search";
 }
 @section active
 {
-    <input class="required" data-bind="value: criteria, selected: true, blurOnEnter: true" />
+    <input data-bind="value: criteria, selected: true, blurOnEnter: true" />
     <button data-bind="click: getResults">Go</button>
 }
 <p class="error" data-bind="text: error"></p>
@@ -23,14 +22,14 @@
         </div>
         <div class="facet-row">
             <div class="facet-cell" data-bind="foreach: fields[0].Values">
-                <p><input type="radio" data-bind="value:Key, checked: $root.selectedFacetValue, click:$root.artistFacetSelected"/><span data-bind="text: ' ' + Key +' ('+ Count+')'"/></p>
+                <p><input type="radio" data-bind="value:Key, checked: $root.selectedFacetValue, click:$root.artistFacetSelected"/><span data-bind="text: ' ' + Key +' ('+ Count+')'"></span></p>
             </div>
             <div class="facet-cell" data-bind="foreach: fields[1].Values">
-                <p><input type="radio" data-bind="value:Key, checked: $root.selectedFacetValue, click:$root.extensionFacetSelected" /><span data-bind="text: ' ' + Key +' ('+ Count+')'" /></p>
+                <p><input type="radio" data-bind="value:Key, checked: $root.selectedFacetValue, click:$root.extensionFacetSelected" /><span data-bind="text: ' ' + Key +' ('+ Count+')'"></span></p>
             </div>
 
             <div class="facet-cell" data-bind="foreach: fields[2].Values">
-                <p><input type="radio" data-bind="value:Key, checked: $root.selectedFacetValue, click:$root.letterFacetSelected" /><span data-bind="text: ' ' + Key +' ('+ Count+')'" /></p>
+                <p><input type="radio" data-bind="value:Key, checked: $root.selectedFacetValue, click:$root.letterFacetSelected" /><span data-bind="text: ' ' + Key +' ('+ Count+')'"></span></p>
             </div>
 
         </div>

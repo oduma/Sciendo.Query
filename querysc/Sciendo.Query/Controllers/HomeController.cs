@@ -1,8 +1,5 @@
-﻿using System.Configuration;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Sciendo.Query.Contracts;
-using Sciendo.Query.DataProviders;
 using Sciendo.Query.Filters;
 
 namespace Sciendo.Query.Controllers

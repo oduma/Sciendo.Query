@@ -14,7 +14,7 @@ namespace Sciendo.Query.DataProviders.Solr
         {
             if(solrResponse==null || solrResponse.facet_counts==null || solrResponse.facet_counts.facet_fields==null)
                 return null;
-            return new Field[] {new Field{Name="Artists", Values=GetFacetField(solrResponse.facet_counts.facet_fields.artist_f).Where(a=>a!=null).ToArray()},
+            return new[] {new Field{Name="Artists", Values=GetFacetField(solrResponse.facet_counts.facet_fields.artist_f).Where(a=>a!=null).ToArray()},
             new Field{Name="Extensions", Values=GetFacetField(solrResponse.facet_counts.facet_fields.extension_f).Where(a=>a!=null).ToArray()},
             new Field{Name="Letters", Values=GetFacetField(solrResponse.facet_counts.facet_fields.letter_catalog_f).Where(a=>a!=null).ToArray()}
         };
@@ -23,11 +23,11 @@ namespace Sciendo.Query.DataProviders.Solr
         private IEnumerable<FieldValue> GetFacetField(object[] fieldFacet)
         {
 
-            if (fieldFacet != null || fieldFacet.Any())
+            if (fieldFacet != null && fieldFacet.Any())
             {
                 var newKey = string.Empty;
                 var newValue = 0;
-                for (int i = 0; i < fieldFacet.Length; i++)
+                for (var i = 0; i < fieldFacet.Length; i++)
                 {
                     if (i % 2 == 0)
                     {
@@ -54,7 +54,7 @@ namespace Sciendo.Query.DataProviders.Solr
                     new Doc
                     {
                         album = (h.Value.album == null) ? d.album : h.Value.album[0],
-                        artist = (h.Value.artist == null) ? d.artist : h.Value.artist,
+                        artist = h.Value.artist ?? d.artist,
                         file_path_id = d.file_path_id,
                         lyrics = (h.Value.lyrics == null) ? d.lyrics : h.Value.lyrics[0],
                         title = (h.Value.title == null) ? d.title : h.Value.title[0],
