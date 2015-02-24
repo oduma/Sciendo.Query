@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Linq;
+using Sciendo.Query.DataProviders.Solr.Mocks;
 
 namespace Sciendo.Query.DataProviders.Tests
 {

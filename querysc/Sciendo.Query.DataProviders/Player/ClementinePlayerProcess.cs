@@ -1,12 +1,7 @@
-﻿using Sciendo.Query.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using Sciendo.Query.Contracts;
 
-namespace Sciendo.Query.DataProviders
+namespace Sciendo.Query.DataProviders.Player
 {
     public class ClementinePlayerProcess:IPlayerProcess
     {

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Sciendo.Query.Contracts.Model;
-using Sciendo.Query.DataProviders.Solr;
 
-namespace Sciendo.Query.DataProviders
+namespace Sciendo.Query.DataProviders.Solr.Mocks
 {
     public class MockResultsProvider : ResultsProviderBase
     {

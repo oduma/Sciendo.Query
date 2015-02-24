@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="DeserializingSolrResponseTests.cs" />
     <Compile Include="MappingTests.cs" />
-    <Compile Include="ProcessAFileTests.cs" />
     <Compile Include="SolrQueryStrategyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,6 +59,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="runoctests.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="runtests.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sciendo.Query.Contracts\Sciendo.Query.Contracts.csproj">

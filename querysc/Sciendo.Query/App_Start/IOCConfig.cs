@@ -5,6 +5,10 @@ using System.Web;
 using Sciendo.IOC;
 using Sciendo.Query.Contracts;
 using Sciendo.Query.DataProviders;
+using Sciendo.Query.DataProviders.Player;
+using Sciendo.Query.DataProviders.Player.Mocks;
+using Sciendo.Query.DataProviders.Solr;
+using Sciendo.Query.DataProviders.Solr.Mocks;
 
 namespace Sciendo.Query
 {
