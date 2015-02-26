@@ -66,6 +66,7 @@
         pageInfoObservable(data.PageInfo)
 
     }
+
     function createResultRow(data) {
         return new datacontext.resultRow(data); // todoItem is injected by todo.model.js
     }
@@ -96,7 +97,7 @@
     }
 
     function solrFilterUrl(id, pageInfo, facetName, facetId) {
-        return "/home/filter?criteria=" + (id || "") + "&numRows=" + (pageInfo.RowsPerPage || "4") + "&startRow=" + (pageInfo.PageStartRow || "0") + "&facetFieldName=" + (facetName || "") + "&facetFieldValue=" + (facetId || "");
+        return "/home/filter?criteria=" + (id || "") + "&numRows=" + (pageInfo.RowsPerPage || "0") + "&startRow=" + (pageInfo.PageStartRow || "0") + "&facetFieldName=" + (facetName || "") + "&facetFieldValue=" + (facetId || "");
     }
 
     function playerUrl(filePath)

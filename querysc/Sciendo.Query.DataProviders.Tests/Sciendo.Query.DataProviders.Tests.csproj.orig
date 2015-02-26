@@ -47,12 +47,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeserializingSolrResponseTests.cs" />
+<<<<<<< HEAD
     <Compile Include="MappingTests.cs" />
+    <Compile Include="ProcessAFileTests.cs" />
+=======
+>>>>>>> origin/master
     <Compile Include="SolrQueryStrategyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="App_data\examplequeryresult.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

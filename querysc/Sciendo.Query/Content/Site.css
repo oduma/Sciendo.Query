@@ -382,6 +382,12 @@ aside {
     padding:0.85em;
     background-color:#cccccc;
 }
+tr:nth-child(2n+1){
+    background-color:aliceblue;
+    border-bottom:solid 1px;
+    border-top:solid 1px;
+    border-color:cadetblue;
+}
 /* login page */
 #loginForm {
     border-right: solid 2px #c8c8c8;

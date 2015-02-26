@@ -52,7 +52,7 @@
                                 <!-- ko ifnot:$root.keyColumn==rowText-->\
                                     <!-- ko if:isLink-->\
                                         <td>\
-                                        <a data-bind=\"click:queue, attr:{'id': $parent[$root.keyColumn] }, html: typeof rowText == 'function' ? rowText($parent) : $parent[rowText]\"/></td>\
+                                        <a href=\"#\" data-bind=\"click:queue, attr:{'id': $parent[$root.keyColumn] }, html: typeof rowText == 'function' ? rowText($parent) : $parent[rowText]\"/></td>\
                                     <!-- /ko -->\
                                     <!-- ko ifnot:isLink-->\
                                         <td data-bind=\"html: typeof rowText == 'function' ? rowText($parent) : $parent[rowText] \"></td>\
