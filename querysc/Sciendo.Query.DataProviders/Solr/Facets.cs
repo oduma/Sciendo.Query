@@ -1,15 +1,18 @@
-﻿namespace Sciendo.Query.DataProviders.Solr
+﻿using Newtonsoft.Json;
+
+namespace Sciendo.Query.DataProviders.Solr
 {
     public class Facets
     {
-        public object facet_queries { get; set; }
-
-        public FacetFields facet_fields { get; set; }
-
-        public object facet_dates { get; set; }
-
-        public object facet_intervals { get; set; }
-
-        public object facet_ranges { get; set; }
+        [JsonProperty("facet_queries")]
+        public object FacetQueries { get; set; }
+        [JsonProperty("facet_fields")]
+        public FacetFields FacetFields { get; set; }
+        [JsonProperty("facet_dates")]
+        public object FacetDates { get; set; }
+        [JsonProperty("facet_intervals")]
+        public object FacetIntervals { get; set; }
+        [JsonProperty("facet_ranges")]
+        public object FacetRanges { get; set; }
     }
 }

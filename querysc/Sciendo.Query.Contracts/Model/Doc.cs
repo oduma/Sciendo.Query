@@ -1,12 +1,20 @@
-﻿namespace Sciendo.Query.Contracts.Model
+﻿using Newtonsoft.Json;
+
+namespace Sciendo.Query.Contracts.Model
 {
     public class Doc
     {
-        public string file_path_id { get; set; }
-        public string file_path { get; set; }
-        public string[] artist { get; set; }
-        public string album { get; set; }
-        public string title { get; set; }
-        public string lyrics { get; set; }
+        [JsonProperty("file_path_id")]
+        public string FilePathId { get; set; }
+        [JsonProperty("file_path")]
+        public string FilePath { get; set; }
+        [JsonProperty("artist")]
+        public string[] Artist { get; set; }
+        [JsonProperty("album")]
+        public string Album { get; set; }
+        [JsonProperty("title")]
+        public string Title { get; set; }
+        [JsonProperty("lyrics")]
+        public string Lyrics { get; set; }
     }
 }

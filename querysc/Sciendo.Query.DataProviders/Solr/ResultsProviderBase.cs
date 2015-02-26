@@ -12,11 +12,11 @@ namespace Sciendo.Query.DataProviders.Solr
 
         protected Field[] GetFields(SolrResponse solrResponse)
         {
-            if(solrResponse==null || solrResponse.facet_counts==null || solrResponse.facet_counts.facet_fields==null)
+            if(solrResponse==null || solrResponse.facet_counts==null || solrResponse.facet_counts.FacetFields==null)
                 return null;
-            return new[] {new Field{Name="Artists", Values=GetFacetField(solrResponse.facet_counts.facet_fields.artist_f).Where(a=>a!=null).ToArray()},
-            new Field{Name="Extensions", Values=GetFacetField(solrResponse.facet_counts.facet_fields.extension_f).Where(a=>a!=null).ToArray()},
-            new Field{Name="Letters", Values=GetFacetField(solrResponse.facet_counts.facet_fields.letter_catalog_f).Where(a=>a!=null).ToArray()}
+            return new[] {new Field{Name="Artists", Values=GetFacetField(solrResponse.facet_counts.FacetFields.ArtistF).Where(a=>a!=null).ToArray()},
+            new Field{Name="Extensions", Values=GetFacetField(solrResponse.facet_counts.FacetFields.ExtensionF).Where(a=>a!=null).ToArray()},
+            new Field{Name="Letters", Values=GetFacetField(solrResponse.facet_counts.FacetFields.LetterCatalogF).Where(a=>a!=null).ToArray()}
         };
         }
 
@@ -49,22 +49,22 @@ namespace Sciendo.Query.DataProviders.Solr
 
         protected Doc[] ApplyHighlights(SolrResponse response)
         {
-            return response.response.docs.Join(response.highlighting, d => d.file_path_id, h => h.Key,
+            return response.response.Docs.Join(response.highlighting, d => d.FilePathId, h => h.Key,
                 (d, h) =>
                     new Doc
                     {
-                        album = (h.Value.album == null) ? d.album : h.Value.album[0],
-                        artist = h.Value.artist ?? d.artist,
-                        file_path_id = d.file_path_id,
-                        lyrics = (h.Value.lyrics == null) ? d.lyrics : h.Value.lyrics[0],
-                        title = (h.Value.title == null) ? d.title : h.Value.title[0],
-                        file_path = d.file_path
+                        Album = (h.Value.Album == null) ? d.Album : h.Value.Album[0],
+                        Artist = h.Value.Artist ?? d.Artist,
+                        FilePathId = d.FilePathId,
+                        Lyrics = (h.Value.Lyrics == null) ? d.Lyrics : h.Value.Lyrics[0],
+                        Title = (h.Value.Title == null) ? d.Title : h.Value.Title[0],
+                        FilePath = d.FilePath
                     }).ToArray();
         }
 
         protected PageInfo GetNewPageInfo (SolrResponse response, int numRowsRequested, int startRow)
         {
-            return new PageInfo { TotalRows = response.response.numFound, RowsPerPage = numRowsRequested, PageStartRow = startRow };
+            return new PageInfo { TotalRows = response.response.NumFound, RowsPerPage = numRowsRequested, PageStartRow = startRow };
         }
 
         public abstract ResultsPackage GetFilteredResultsPackage(string criteria, int numRow, int startRow, string facetFieldName, string facetFieldValue);
